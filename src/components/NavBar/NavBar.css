@@ -37,7 +37,7 @@
    }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 430px) {
    .navbar__menu {
       width: 258px;
       margin-bottom: 17px;

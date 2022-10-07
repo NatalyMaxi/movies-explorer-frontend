@@ -29,7 +29,7 @@
    }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 430px) {
    .promo {
       width: calc(100% - 28px);
       margin-top: 14px;
