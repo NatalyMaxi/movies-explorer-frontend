@@ -12,13 +12,13 @@ const Portfolio = () => {
                <span>↗</span>
             </li>
             <li className="portfolio__link-container">
-               <a className="portfolio__link" rel='noreferrer' href="https://github.com/NatalyMaxi/russian-travel" target="_blank">
+               <a className="portfolio__link" rel='noreferrer' href="https://natalymaxi.github.io/russian-travel/" target="_blank">
                   Адаптивный сайт
                </a>
                <span>↗</span>
             </li>
             <li className="portfolio__link-container">
-               <a className="portfolio__link" rel='noreferrer' href="https://github.com/NatalyMaxi/react-mesto-api-full" target="_blank">
+               <a className="portfolio__link" rel='noreferrer' href="https://domainname.nataly.nomoredomains.sbs" target="_blank">
                   Одностраничное приложение
                </a>
                <span>↗</span>
