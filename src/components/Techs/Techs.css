@@ -64,11 +64,8 @@
    padding: 21px 0 22px;
 }
 
-/* @media screen and (max-width: 830px) {
-   
-} */
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 768px) {
    .techs {
       padding: 90px 50px;
    }
@@ -110,7 +107,7 @@
 
 @media screen and (max-width: 430px) {
    .techs {
-      padding: 90px 50px;
+      padding: 70px 14px;
    }
 
    .techs__title {
