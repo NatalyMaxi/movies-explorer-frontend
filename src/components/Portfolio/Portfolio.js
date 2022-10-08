@@ -6,7 +6,7 @@ const Portfolio = () => {
          <h3 className="portfolio__title">Портфолио</h3>
          <ul className="portfolio__links">
             <li className="portfolio__link-container">
-               <a className="portfolio__link" rel='noreferrer' href="https://github.com/NatalyMaxi/how-to-learn" target="_blank">
+               <a className="portfolio__link" rel='noreferrer' href="https://natalymaxi.github.io/how-to-learn/" target="_blank">
                   Статичный сайт
                </a>
                <span>↗</span>
