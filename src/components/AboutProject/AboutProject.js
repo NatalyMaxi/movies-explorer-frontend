@@ -1,4 +1,4 @@
-import './AboutProject.css'
+import './AboutProject.css';
 
 const AboutProject = () => {
    return (
