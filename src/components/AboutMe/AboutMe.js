@@ -12,7 +12,7 @@ const AboutMe = () => {
                <p className="about-me__description">
                   Я живу в Тюмени. Окончила ЧПОУ ТОСПО «ТюмКЭУП» по специальности юрист. Недавно возник повышенный интерес к программированию, захотелось самой создавать сайты, приложения. После некоторых раздумий было принято решение попробовать развиваться в данной сфере. В итоге прошла курсы Яндекс. Практикума "Веб-разработчик". Обучение очень понравилось, теперь еще больше желание углубиться в эту профессию и стать востребованным специалистом.
                </p>
-               <a className="about-me__link" href='https://github.com/NatalyMaxi' target="_blank" rel='noreferrer'>Github</a>
+               <a className="about-me__link" href="https://github.com/NatalyMaxi" target="_blank" rel="noreferrer">Github</a>
             </div>
             <img className="about-me__photo" src={photo} alt="Фотография" />
          </div>

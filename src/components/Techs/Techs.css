@@ -64,7 +64,6 @@
    padding: 21px 0 22px;
 }
 
-
 @media screen and (max-width: 768px) {
    .techs {
       padding: 90px 50px;
@@ -127,5 +126,9 @@
       font-size: 11px;
       line-height: 16px;
       margin-bottom: 50px;
+   }
+
+   .techs__items {
+      grid-template-columns: 84px 84px;
    }
 }

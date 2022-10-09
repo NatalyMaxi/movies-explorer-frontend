@@ -17,3 +17,5 @@ const Footer = () => {
 }
 
 export default Footer;
+
+// Footer — презентационный компонент, который отрисовывает подвал.
