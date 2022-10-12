@@ -4,12 +4,14 @@
 // import AboutMe from './AboutMe/AboutMe';
 // import Portfolio from './Portfolio/Portfolio';
 
-import Movies from "./Movies/Movies";
+import Movies from './Movies/Movies';
+import SearchForm from './SearchForm/SearchForm';
 
 
 const Main = () => {
    return (
       <>
+         <SearchForm/>
          {/* <Promo />
          <AboutProject />
          <Techs />
