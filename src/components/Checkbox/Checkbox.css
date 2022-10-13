@@ -2,11 +2,10 @@
    display: flex;
    justify-content: center;
    align-items: center;
+   height: 40px;
    background-color: #2f2f2f;
    border-left: 1px solid #505050;
-   border-top-right-radius: 9px;
-   border-bottom-right-radius: 9px;
-   padding: 16px 19px;
+   padding: 0 30px;
 }
 
 .checkbox__input {
@@ -51,11 +50,20 @@
    margin-left: 15px;
 }
 
+@media screen and (max-width: 500px) {
+   .checkbox {
+   padding-left: 19px;
+   }
+}
+
 @media screen and (max-width: 430px) {
    .checkbox {
+      position: absolute;
+      top: 198px;
+      right: 86px;
       background-color: #202020;
       border: none;
-      padding-top: 46px;
+      padding: 0;
    }
 
    .checkbox__label {
