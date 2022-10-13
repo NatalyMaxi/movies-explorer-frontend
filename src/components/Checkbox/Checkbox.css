@@ -2,9 +2,11 @@
    display: flex;
    justify-content: center;
    align-items: center;
+   background-color: #2f2f2f;
    border-left: 1px solid #505050;
+   border-top-right-radius: 9px;
+   border-bottom-right-radius: 9px;
    padding: 16px 19px;
-   margin-left: 19px;
 }
 
 .checkbox__input {
@@ -50,6 +52,12 @@
 }
 
 @media screen and (max-width: 430px) {
+   .checkbox {
+      background-color: #202020;
+      border: none;
+      padding-top: 46px;
+   }
+
    .checkbox__label {
       font-size: 11px;
    }

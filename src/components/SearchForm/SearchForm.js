@@ -20,8 +20,8 @@ const SearchForm = () => {
             <button className="search__button">
                <img className="search__icon" src={icon} alt="Иконка лупа" />
             </button>
-            <Checkbox />
          </form>
+         <Checkbox />
       </section>
    )
 };
