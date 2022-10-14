@@ -1,21 +1,17 @@
-// import Promo from './Promo/Promo';
-// import AboutProject from './AboutProject/AboutProject';
-// import Techs from './Techs/Techs';
-// import AboutMe from './AboutMe/AboutMe';
-// import Portfolio from './Portfolio/Portfolio';
-// import Movies from './Movies/Movies';
-import SavedMovies from './SavedMovies/SavedMovies';
+import Promo from './Promo/Promo';
+import AboutProject from './AboutProject/AboutProject';
+import Techs from './Techs/Techs';
+import AboutMe from './AboutMe/AboutMe';
+import Portfolio from './Portfolio/Portfolio';
 
 const Main = () => {
    return (
       <>
-         {/* <Promo />
+         <Promo />
          <AboutProject />
          <Techs />
          <AboutMe />
-         <Portfolio /> */}
-         {/* <Movies /> */}
-         <SavedMovies />
+         <Portfolio />
       </>
    );
 }
