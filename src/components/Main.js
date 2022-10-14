@@ -3,9 +3,8 @@
 // import Techs from './Techs/Techs';
 // import AboutMe from './AboutMe/AboutMe';
 // import Portfolio from './Portfolio/Portfolio';
-
-import Movies from './Movies/Movies';
-
+// import Movies from './Movies/Movies';
+import SavedMovies from './SavedMovies/SavedMovies';
 
 const Main = () => {
    return (
@@ -15,7 +14,8 @@ const Main = () => {
          <Techs />
          <AboutMe />
          <Portfolio /> */}
-         <Movies />
+         {/* <Movies /> */}
+         <SavedMovies />
       </>
    );
 }
