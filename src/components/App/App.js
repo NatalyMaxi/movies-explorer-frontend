@@ -5,6 +5,8 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import ErrorPage from '../ErrorPage/ErrorPage';
+
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
           <Header />
           <SavedMovies />
           <Footer />
+        </Route>
+        <Route path="*">
+          <ErrorPage/>
         </Route>
       </Switch>
     </div>
