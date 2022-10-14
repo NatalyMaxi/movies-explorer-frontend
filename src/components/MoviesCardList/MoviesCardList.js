@@ -12,7 +12,9 @@ const MoviesCardList = () => {
             <MoviesCard />
             <MoviesCard />
          </div>
-         <button className="cards__button">Ещё</button>
+         <div className="cards__button-container">
+            <button className="cards__button">Ещё</button>
+         </div>
       </section>
    )
 }
