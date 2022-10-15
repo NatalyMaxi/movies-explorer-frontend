@@ -7,6 +7,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Auth from '../Auth/Auth';
+import Register from '../Register/Register';
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/signin">
           <Auth />
+        </Route>
+        <Route path="/signup">
+          <Register />
         </Route>
         <Route path="*">
           <ErrorPage />

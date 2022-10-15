@@ -1,4 +1,7 @@
 .form {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
    width: 396px;
    height: 335px;
    padding-bottom: 69px;
@@ -7,9 +10,9 @@
 }
 
 @media screen and (max-width: 430px) {
-.form {
-   width: 260px;
-   height: 423px;
-   padding-bottom: 157px;
-}
+   .form {
+      width: 260px;
+      height: 423px;
+      padding-bottom: 157px;
+   }
 }

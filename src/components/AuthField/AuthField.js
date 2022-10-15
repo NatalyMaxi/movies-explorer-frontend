@@ -11,7 +11,7 @@ const AuthField = ({ label, error, name, type, ...rest }) => {
             {...rest}
          />
          <span className='auth-field__error'>{error}</span>
-         
+
       </div>
    )
 }

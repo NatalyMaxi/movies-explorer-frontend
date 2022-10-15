@@ -1,17 +1,14 @@
 import { Link } from 'react-router-dom';
-import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
-import Form from '../Form/Form';
 import Logo from '../Logo/logo';
 import './Auth.css';
 
 
-const Auth = ({ title, subtitle, route, link }) => {
+const Auth = ({ title, children, subtitle, route, link }) => {
    return (
       <section className='auth'>
          <Logo />
          <h2 className='auth__title'>{title}</h2>
-         <Form />
-         <ButtonSubmit />
+         {children}
          <p className='auth__subtitle'>
             {subtitle}
             <Link to={route} className='auth__link'>{link}</Link>
@@ -23,4 +20,4 @@ const Auth = ({ title, subtitle, route, link }) => {
 
 export default Auth;
 
-// Auth — компонент страницы с авторизацией пользователей
+// Auth — компонент для страниц с авторизацией и регистрацией пользователя
