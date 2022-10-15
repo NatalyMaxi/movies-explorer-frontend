@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import ErrorPage from '../ErrorPage/ErrorPage';
-import Auth from '../Auth/Auth';
+import Login from '../Login/Login';
 import Register from '../Register/Register';
 
 
@@ -30,7 +30,7 @@ function App() {
           <Footer />
         </Route>
         <Route path="/signin">
-          <Auth />
+          <Login />
         </Route>
         <Route path="/signup">
           <Register />
