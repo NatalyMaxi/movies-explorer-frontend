@@ -3,8 +3,8 @@ import './MoviesCardList.css';
 
 const MoviesCardList = () => {
    return (
-      <section className="cards">
-         <div className="cards__container">
+      <section className='cards'>
+         <div className='cards__container'>
             <MoviesCard />
             <MoviesCard />
             <MoviesCard />
@@ -12,8 +12,8 @@ const MoviesCardList = () => {
             <MoviesCard />
             <MoviesCard />
          </div>
-         <div className="cards__button-container">
-            <button className="cards__button">Ещё</button>
+         <div className='cards__button-container'>
+            <button className='cards__button'>Ещё</button>
          </div>
       </section>
    )

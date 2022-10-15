@@ -16,7 +16,6 @@ const Auth = ({ title, subtitle, route, link }) => {
             {subtitle}
             <Link to={route} className='auth__link'>{link}</Link>
          </p>
-         
       </section>
    )
 
