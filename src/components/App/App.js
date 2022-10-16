@@ -8,34 +8,38 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import Profile from '../Profile/Profile';
 
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <Header />
           <Main />
           <Footer />
         </Route>
-        <Route path="/movies">
+        <Route path='/movies'>
           <Header />
           <Movies />
           <Footer />
         </Route>
-        <Route exact path="/saved-movies">
+        <Route exact path='/saved-movies'>
           <Header />
           <SavedMovies />
           <Footer />
         </Route>
-        <Route path="/signin">
+        <Route path='/profile'>
+          <Profile/>
+        </Route>
+        <Route path='/signin'>
           <Login />
         </Route>
-        <Route path="/signup">
+        <Route path='/signup'>
           <Register />
         </Route>
-        <Route path="*">
+        <Route path='*'>
           <ErrorPage />
         </Route>
       </Switch>
