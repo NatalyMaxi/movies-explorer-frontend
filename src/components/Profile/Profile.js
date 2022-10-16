@@ -1,7 +1,10 @@
 import './Profile.css';
+import Header from '../Header/Header'
 
 const Profile = () => {
    return (
+      <>
+         <Header/>
          <section className='profile'>
             <h3 className='profile__title'>Привет, Наталья!</h3>
             <form className='profile__form'>
@@ -38,6 +41,7 @@ const Profile = () => {
                </div>
             </form>
          </section>
+      </>
    )
 }
 
