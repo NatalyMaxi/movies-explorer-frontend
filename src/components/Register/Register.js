@@ -9,7 +9,7 @@ const Register = () => {
       <Auth
          title='Добро пожаловать!'
          subtitle='Уже зарегистрированы?'
-         route='/sign-up'
+         route='/signin'
          link='Войти'
       >
          <Form>

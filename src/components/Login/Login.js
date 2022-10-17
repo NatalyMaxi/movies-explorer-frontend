@@ -9,7 +9,7 @@ const Login = () => {
       <Auth
          title='Рады видеть!'
          subtitle='Ещё не зарегистрированы?'
-         route='/sign-in'
+         route='/signup'
          link='Регистрация'
       >
          <Form>
