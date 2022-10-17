@@ -1,5 +1,6 @@
 import './Navigation.css';
 import { Link, NavLink } from 'react-router-dom';
+import PopupNavigation from '../PopupNavigation/PopupNavigation';
 
 const Navigation = ({ loggedIn }) => {
    return (
@@ -29,6 +30,7 @@ const Navigation = ({ loggedIn }) => {
                </nav>
          )
          }
+         <PopupNavigation/>
       </>
    )
 }
