@@ -3,13 +3,13 @@ import Logo from '../Logo/logo';
 import Navigation from '../Navigation/Navigation';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ loggedIn }) => {
    return (
       <header className='header'>
          <Link to='/'>
             <Logo />
          </Link>
-         <Navigation />
+         <Navigation loggedIn={loggedIn} />
       </header>
    )
 }
