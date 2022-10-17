@@ -9,24 +9,24 @@ const Navigation = ({ loggedIn }) => {
                <div className='navigation'>
                   <nav className='navigation__links'>
                      <NavLink to='/movies' className='navigation__link' activeClassName='navigation__link_active'>Фильмы</NavLink>
-                     <NavLink to='//saved-movies' className='navigation__link'>Сохранённые фильмы</NavLink>
+                     <NavLink to='/saved-movies' className='navigation__link' activeClassName='navigation__link_active'>Сохранённые фильмы</NavLink>
                   </nav>
                </div>
-               <div className='navigation'>
+               <nav className='navigation'>
                   <Link to='/profile'>
                      <button className='navigation__btn'></button>
                   </Link>
-               </div>
+               </nav>
             </>
          ) : (
-            <div className='navigation'>
+               <nav className='navigation'>
                   <Link to='/signup' className='navigation__link navigation__link_unregistered'>Регистрация</Link>
                <Link to='/signin'>
                   <button className='navigation__button'>
                      Войти
                   </button>
                </Link>
-            </div>
+               </nav>
          )
          }
       </>
