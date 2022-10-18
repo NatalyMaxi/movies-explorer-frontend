@@ -3,10 +3,14 @@
 }
 
 @media screen and (max-width: 768px) {
-   .popup {
-      display: flex;
+   /* .popup {
       z-index: 1;
-      transition: 0.3s linear;
+      transition: 0.9s ease;
+   } */
+   .popup_is-active {
+      display: block;
+      z-index: 3;
+      transition: 0.9s ease;
    }
 
    .popup__overlay {

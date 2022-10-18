@@ -1,8 +1,18 @@
 import './Navigation.css';
 import { Link, NavLink } from 'react-router-dom';
-import PopupNavigation from '../PopupNavigation/PopupNavigation';
+import React, { useState } from 'react';
+import PopupNavigation from '../PopupNavigation/PopupNavigation'
 
 const Navigation = ({ loggedIn }) => {
+   const [isPopupNavigation, setIsPopupNavigation] = useState(false);
+
+   const closePopups = () => {
+      setIsPopupNavigation(false)
+   }
+
+   const openPopup = () => {
+      setIsPopupNavigation(true);
+   };
    return (
       <>
          {loggedIn ? (
@@ -15,22 +25,23 @@ const Navigation = ({ loggedIn }) => {
                </div>
                <nav className='navigation'>
                   <Link to='/profile'>
-                     <button className='navigation__btn'></button>
+                     <button className='navigation__btn'>Аккаунт</button>
                   </Link>
                </nav>
+               <button className='navigation__btn-nav' onClick={openPopup} />
             </>
          ) : (
-               <nav className='navigation'>
-                  <Link to='/signup' className='navigation__link navigation__link_unregistered'>Регистрация</Link>
+            <nav className='navigation'>
+               <Link to='/signup' className='navigation__link navigation__link_unregistered'>Регистрация</Link>
                <Link to='/signin'>
                   <button className='navigation__button'>
                      Войти
                   </button>
                </Link>
-               </nav>
+            </nav>
          )
          }
-         <PopupNavigation/>
+         <PopupNavigation isOpen={isPopupNavigation} onClose={closePopups} />
       </>
    )
 }

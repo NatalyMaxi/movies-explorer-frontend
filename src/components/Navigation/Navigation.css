@@ -41,7 +41,6 @@
 }
 
 .navigation__btn {
-   content: '';
    font-weight: 500;
    font-size: 14px;
    line-height: 16px;
@@ -53,8 +52,8 @@
    cursor: pointer;
 }
 
-.navigation__btn::before {
-   content: 'Аккаунт';
+.navigation__btn-nav {
+   display: none;
 }
 
 .navigation__link:hover,
@@ -65,18 +64,21 @@
 }
 
 @media screen and (max-width: 768px) {
-   .navigation__links {
+   .navigation__links,
+   .navigation__btn {
       display: none;
    }
 
-   .navigation__btn {
-      content: '';
+   .navigation__btn-nav {
+      display: block;
+      width: 44px;
+      height: 44px;
+      border: none;
+      cursor: pointer;
       background: #202020;
       border-radius: 0;
       padding: 8px 11px;
-   }
-   .navigation__btn::before {
-      content: url(../../images/icon-burger.svg);
+      background-image: url('../../images/icon-burger.svg');
    }
 }
 
@@ -94,7 +96,9 @@
       padding: 5px 12px;
    }
 
-   .navigation__btn {
+   .navigation__btn-nav {
+      width: 40px;
+      height: 43px;
       padding: 12px 9px;
    }
 }

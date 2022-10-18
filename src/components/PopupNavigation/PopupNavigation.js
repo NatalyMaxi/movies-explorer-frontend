@@ -1,12 +1,14 @@
 import './PopupNavigation.css';
 import { NavLink, Link } from 'react-router-dom';
 
-const PopupNavigation = () => {
+const PopupNavigation = ({ onClose, isOpen }) => {
+   const popupIsOpen = isOpen ? 'popup_is-active' : '';
+   
    return (
-      <div className='popup'>
+      <div className={`popup ${popupIsOpen}`}>
          <div className='popup__overlay'>
             <div className='popup__container'>
-               <button type='button' className='popup__close' />
+               <button type='button' className='popup__close' onClick={onClose} />
                <ul className='popup__list'>
                   <li className='popup__item'>
                      <NavLink exact to='/' className='popup__link' activeClassName='popup__link_active'>
