@@ -22,8 +22,6 @@
 }
 
 .portfolio__link-container {
-   display: flex;
-   justify-content: space-between;
    font-weight: 400;
    font-size: 30px;
    line-height: 50px;
@@ -35,6 +33,8 @@
 }
 
 .portfolio__link {
+   display: flex;
+   justify-content: space-between;
    color: #ffffff;
    text-decoration: none;
    cursor: pointer;
@@ -55,8 +55,8 @@
    }
 
    .portfolio__link-container {
-   padding-bottom: 17px;
-}
+      padding-bottom: 17px;
+   }
 
    .portfolio__link-container {
       font-size: 28px;

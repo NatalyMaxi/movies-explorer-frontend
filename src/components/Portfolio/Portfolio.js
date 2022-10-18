@@ -8,20 +8,23 @@ const Portfolio = () => {
             <li className='portfolio__link-container'>
                <a className='portfolio__link' rel='noreferrer' href='https://natalymaxi.github.io/how-to-learn/' target='_blank'>
                   Статичный сайт
+                  <span>↗</span>
                </a>
-               <span>↗</span>
+
             </li>
             <li className='portfolio__link-container'>
                <a className='portfolio__link' rel='noreferrer' href='https://natalymaxi.github.io/russian-travel/' target='_blank'>
                   Адаптивный сайт
+                  <span>↗</span>
                </a>
-               <span>↗</span>
+
             </li>
             <li className='portfolio__link-container'>
                <a className='portfolio__link' rel='noreferrer' href='https://domainname.nataly.nomoredomains.sbs' target='_blank'>
                   Одностраничное приложение
+                  <span>↗</span>
                </a>
-               <span>↗</span>
+
             </li>
          </ul>
       </div>
