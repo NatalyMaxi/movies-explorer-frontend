@@ -10,7 +10,7 @@ const SavedMovies = ({ loggedIn }) => {
          <Header loggedIn={loggedIn} />
          <section className='saved-movies'>
             <SearchForm />
-            <MoviesCardList />
+            <MoviesCardList isMovies={false} />
          </section>
          <Footer />
       </>

@@ -10,7 +10,7 @@ const Movies = ({ loggedIn }) => {
          <Header loggedIn={loggedIn} />
          <section className='movies'>
             <SearchForm />
-            <MoviesCardList />
+            <MoviesCardList isMovies={true} />
          </section>
          <Footer />
       </>

@@ -1,17 +1,16 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-const MoviesCardList = () => {
+const MoviesCardList = ({ isMovies }) => {
    return (
       <section className='cards'>
          <div className='cards__container'>
             <MoviesCard />
             <MoviesCard />
             <MoviesCard />
-            <MoviesCard />
          </div>
          <div className='cards__button-container'>
-            <button className='cards__button'>Ещё</button>
+            <button className={isMovies ? 'cards__button' : 'cards__button_hidden'}>Ещё</button>
          </div>
       </section>
    )
