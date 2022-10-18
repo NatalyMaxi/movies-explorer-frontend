@@ -18,7 +18,7 @@ const SearchForm = () => {
                placeholder='Фильм'
                required
             />
-            <button className='search__button'>
+            <button className='search__button' type='submit'>
                <img className='search__icon' src={find} alt='Иконка лупа' />
             </button>
             <Checkbox />

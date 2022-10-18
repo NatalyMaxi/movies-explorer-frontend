@@ -25,16 +25,16 @@ const Navigation = ({ loggedIn }) => {
                </div>
                <nav className='navigation'>
                   <Link to='/profile'>
-                     <button className='navigation__btn'>Аккаунт</button>
+                     <button className='navigation__btn' type='button'>Аккаунт</button>
                   </Link>
                </nav>
-               <button className='navigation__btn-nav' onClick={openPopup} />
+               <button className='navigation__btn-nav' type='button' onClick={openPopup} />
             </>
          ) : (
             <nav className='navigation'>
                <Link to='/signup' className='navigation__link navigation__link_unregistered'>Регистрация</Link>
                <Link to='/signin'>
-                  <button className='navigation__button'>
+                     <button className='navigation__button' type='button'>
                      Войти
                   </button>
                </Link>

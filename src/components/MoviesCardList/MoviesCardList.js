@@ -10,7 +10,7 @@ const MoviesCardList = ({ isMovies }) => {
             <MoviesCard />
          </div>
          <div className='cards__button-container'>
-            <button className={isMovies ? 'cards__button' : 'cards__button_hidden'}>Ещё</button>
+            <button className={isMovies ? 'cards__button' : 'cards__button_hidden'} type='button'>Ещё</button>
          </div>
       </section>
    )

@@ -44,6 +44,11 @@
    background: #202020;
 }
 
+.profile__input:focus {
+   outline: none;
+   border: 1px solid #ee3465;
+}
+
 .profile__line {
    width: 100%;
    border-bottom: 1px solid #424242;

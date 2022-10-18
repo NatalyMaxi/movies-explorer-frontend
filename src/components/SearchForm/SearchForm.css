@@ -1,7 +1,7 @@
 .search {
    position: relative;
    margin: 0 auto 10px;
-   padding: 70px 70px 69px;
+   padding: 70px 0 69px;
    border-bottom: 1px solid #424242;
 }
 
@@ -28,6 +28,11 @@
    color: #8b8b8b;
    background: #2f2f2f;
    padding: 0;
+}
+
+.search__input:focus {
+   outline: none;
+   border: 1px solid #3DDC84;
 }
 
 .search__icon {
@@ -63,7 +68,7 @@
 
 @media screen and (max-width: 768px) {
    .search {
-      padding: 75px 30px 110px;
+      padding: 75px 0 110px;
    }
 
    .search__button {

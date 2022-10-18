@@ -27,7 +27,7 @@ const PopupNavigation = ({ onClose, isOpen }) => {
                   </li >
                </ul>
                <Link to='/profile'>
-                  <button className='popup__button'>Аккаунт</button>
+                  <button className='popup__button' type='button'>Аккаунт</button>
                </Link>
             </div>
          </div>

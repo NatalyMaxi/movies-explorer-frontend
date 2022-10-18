@@ -9,9 +9,9 @@ const MoviesCard = () => {
             <span className='card__duration-movie'>1ч 17м</span>
          </div>
          <img className='card__poster-movie' src={movie} alt='Постер фильма' />
-         <button className='card__button' />
-         <button className='card__button_saved' />
-         <button className='card__button_delete' />
+         <button className='card__button' type='button' />
+         <button className='card__button_saved' type='button' />
+         <button className='card__button_delete' type='button' />
       </div>
    )
 }
