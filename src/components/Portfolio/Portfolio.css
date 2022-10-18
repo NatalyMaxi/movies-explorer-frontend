@@ -1,7 +1,7 @@
 .portfolio {
    max-width: 1140px;
    margin: 0 auto;
-   padding: 0 70px 125px;
+   padding: 0 70px 105px;
 }
 
 .portfolio__title {
@@ -51,8 +51,12 @@
 
 @media screen and (max-width: 768px) {
    .portfolio {
-      padding: 0 50px 90px;
+      padding: 0 50px 70px;
    }
+
+   .portfolio__link-container {
+   padding-bottom: 17px;
+}
 
    .portfolio__link-container {
       font-size: 28px;
@@ -62,7 +66,7 @@
 
 @media screen and (max-width: 430px) {
    .portfolio {
-      padding: 0 14px 70px;
+      padding: 0 14px 50px;
    }
 
    .portfolio__title {

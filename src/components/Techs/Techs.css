@@ -1,7 +1,7 @@
 .techs {
    max-width: 1140px;
    margin: 0 auto;
-   padding: 100px 70px;
+   padding: 94px 70px 100px;
    background: #272727;
 }
 
@@ -13,6 +13,7 @@
    border-bottom: 1px solid #dadada;
    margin: 0 0 90px;
    padding-bottom: 23px;
+   padding-top: 0;
 }
 
 .techs__container {
