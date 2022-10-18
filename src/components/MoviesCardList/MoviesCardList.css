@@ -48,7 +48,7 @@
 @media screen and (max-width: 430px) {
    .cards {
       max-width: 300px;
-      padding-top: 54px;
+      padding-top: 40px;
    }
 
    .cards__container {

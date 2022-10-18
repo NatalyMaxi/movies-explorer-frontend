@@ -50,6 +50,13 @@
    margin-left: 15px;
 }
 
+@media screen and (max-width: 768px) {
+   .checkbox {
+   margin-left: 19px;
+   padding-left: 13px;
+   }
+}
+
 @media screen and (max-width: 500px) {
    .checkbox {
    padding-left: 19px;
@@ -59,8 +66,8 @@
 @media screen and (max-width: 430px) {
    .checkbox {
       position: absolute;
-      top: 198px;
-      right: 86px;
+      top: 185px;
+      right: 76px;
       background-color: #202020;
       border: none;
       padding: 0;

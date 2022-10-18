@@ -9,8 +9,6 @@ const MoviesCardList = () => {
             <MoviesCard />
             <MoviesCard />
             <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
          </div>
          <div className='cards__button-container'>
             <button className='cards__button'>Ещё</button>

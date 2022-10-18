@@ -7,7 +7,7 @@
 .card__description-movie {
    display: flex;
    flex-direction: column;
-   padding: 14px 0 14px;
+   padding: 14px 0 14px 5px;
 }
 
 .card__name-movie {
@@ -103,4 +103,8 @@
       width: 300px;
       height: 168px;
    }
+
+   .card__description-movie {
+   padding: 14px 0 14px 15px;
+}
 }

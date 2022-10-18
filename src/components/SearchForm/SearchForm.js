@@ -1,5 +1,6 @@
 import './SearchForm.css';
 import icon from '../../images/icon.svg';
+import find from '../../images/find.svg'
 import Checkbox from '../Checkbox/Checkbox';
 
 const SearchForm = () => {
@@ -18,7 +19,7 @@ const SearchForm = () => {
                required
             />
             <button className='search__button'>
-               <img className='search__icon' src={icon} alt='Иконка лупа' />
+               <img className='search__icon' src={find} alt='Иконка лупа' />
             </button>
             <Checkbox />
          </form>

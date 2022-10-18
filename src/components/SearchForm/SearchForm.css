@@ -61,6 +61,17 @@
    opacity: 0.5;
 }
 
+@media screen and (max-width: 768px) {
+   .search {
+      padding-top: 75px;
+      padding-bottom: 110px;
+   }
+
+   .search__button {
+   margin-right: 0;
+}
+}
+
 @media screen and (max-width: 500px) {
    .search__input-label {
       display: none;
@@ -84,7 +95,7 @@
       flex-direction: column;
       max-width: 300px;
       height: 148px;
-      padding: 80px 0 44px;
+      padding: 80px 0 30px;
       margin: 0 auto 10px;
    }
 
