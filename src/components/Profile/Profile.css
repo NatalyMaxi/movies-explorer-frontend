@@ -88,7 +88,11 @@
    }
 
    .profile__title {
-      margin-bottom: 96px;
+      margin-bottom: 80px;
+   }
+
+   .profile__button-container {
+      margin-top: 190px;
    }
 }
 
@@ -99,8 +103,12 @@
       padding: 70px 0 40px;
    }
 
+   .profile__title {
+      margin-bottom: 60px;
+   }
+
    .profile__button-container {
-      margin-top: 363px;
+      margin-top: 368px;
    }
 
    .profile__button {
