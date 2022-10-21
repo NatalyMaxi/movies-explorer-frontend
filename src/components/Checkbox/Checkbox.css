@@ -52,25 +52,25 @@
 
 @media screen and (max-width: 768px) {
    .checkbox {
-   margin-left: 19px;
-   padding-left: 13px;
+      margin-left: 19px;
+      padding-left: 13px;
    }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
    .checkbox {
-   padding-left: 19px;
+      position: absolute;
+      top: 185px;
+      right: 126px;
+      background-color: #202020;
+      border: none;
+      padding: 0;
    }
 }
 
 @media screen and (max-width: 430px) {
    .checkbox {
-      position: absolute;
-      top: 185px;
       right: 76px;
-      background-color: #202020;
-      border: none;
-      padding: 0;
    }
 
    .checkbox__label {
