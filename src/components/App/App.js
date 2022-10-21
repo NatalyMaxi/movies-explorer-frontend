@@ -8,6 +8,7 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   // временное решение, пока нет функции изменения состояния
@@ -20,15 +21,21 @@ function App() {
         <Route exact path='/'>
           <Main />
         </Route>
-        <Route path='/movies'>
-          <Movies loggedIn={loggedIn} />
-        </Route>
-        <Route exact path='/saved-movies'>
-          <SavedMovies loggedIn={loggedIn} />
-        </Route>
-        <Route path='/profile'>
-          <Profile loggedIn={loggedIn} />
-        </Route>
+        <ProtectedRoute
+          path='/movies'
+          component={Movies}
+          loggedIn={loggedIn}
+        />
+        <ProtectedRoute
+          path='/saved-movies'
+          component={SavedMovies}
+          loggedIn={loggedIn}
+        />
+        <ProtectedRoute
+          path='/profile'
+          component={Profile}
+          loggedIn={loggedIn}
+        />
         <Route path='/signin'>
           <Login />
         </Route>
