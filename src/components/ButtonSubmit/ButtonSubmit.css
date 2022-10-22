@@ -17,7 +17,7 @@
    opacity: 0.5;
 }
 
-.button:disabled {
+.button_disabled {
    background: #6a6c70;
    pointer-events: none;
 }

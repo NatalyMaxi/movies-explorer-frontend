@@ -1,10 +1,21 @@
-import Auth from "../Auth/Auth";
-import AuthField from "../AuthField/AuthField";
-import ButtonSubmit from "../ButtonSubmit/ButtonSubmit";
-import Form from "../Form/Form";
+import { useFormValidation } from '../../hooks/useForm';
+import Auth from '../Auth/Auth';
+import AuthField from '../AuthField/AuthField';
+import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
+import Form from '../Form/Form';
 
 
-const Register = () => {
+const Register = ({ onRegister, errorMessage }) => {
+   const { values, handleChange, errors, isValid } = useFormValidation();
+
+   function handleSubmit(evt) {
+      evt.preventDefault();
+      if (!values.password || !values.email || !values.name) {
+         return;
+      }
+      onRegister(values);
+   }
+
    return (
       <Auth
          title='Добро пожаловать!'
@@ -12,34 +23,47 @@ const Register = () => {
          route='/signin'
          link='Войти'
       >
-         <Form>
+         <Form
+            onSubmit={handleSubmit}
+            errorMessage={errorMessage.name || ''}
+         >
             <AuthField
                label='Имя'
                name='name'
                type='text'
-               error=''
-               minLength="2"
-               maxLength="30"
+               minLength='2'
+               maxLength='30'
                required
+               autoComplete='on'
+               value={values.name || ''}
+               error={errors.name || ''}
+               onChange={handleChange}
             />
             <AuthField
                label='E-mail'
                name='email'
                type='email'
-               error=''
                required
+               autoComplete='on'
+               value={values.email || ''}
+               error={errors.email || ''}
+               onChange={handleChange}
             />
             <AuthField
                label='Пароль'
                name='password'
                type='password'
-               error='Что-то пошло не так...'
                minLength='8'
                required
+               value={values.password || ''}
+               error={errors.password || ''}
+               onChange={handleChange}
             />
          </Form>
          <ButtonSubmit
+            type='submit'
             text='Зарегистрироваться'
+            disabled={!isValid}
          />
       </Auth>
    )

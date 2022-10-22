@@ -1,11 +1,16 @@
 import './Form.css';
 
-const Form = ({ children, errorMessage }) => {
+const Form = ({ onSubmit, children, errorMessage }) => {
    return (
-      <div className='form'>
+      <form
+         className='form'
+         noValidate
+         onSubmit={onSubmit}
+         // errorMessage={errorMessage}
+      >
          {children}
-         <span className="form__error">{errorMessage}</span>
-      </div>
+         <span className='form__error'>{errorMessage}</span>
+      </form>
    )
 }
 
