@@ -1,9 +1,10 @@
 import './Form.css';
 
-const Form = ({ children }) => {
+const Form = ({ children, errorMessage }) => {
    return (
       <div className='form'>
          {children}
+         <span className="form__error">{errorMessage}</span>
       </div>
    )
 }
