@@ -24,16 +24,43 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
 
-  function handleRegistration({name, email, password}) {
+  // Регистрация пользователя
+  function handleRegistration({ name, email, password }) {
     mainApi.register({ name, email, password })
       .then(() => {
-        history.push('/movies');
+        handleAuthorization({ email, password });
       })
       .catch((err) => {
-        setErrorMessage('Что-то пошло не так...')
-        console.log(err.message)
+        if (err.message === "Ошибка: 409") {
+          setErrorMessage('Пользователь с таким email уже зарегистрирован')
+        } else {
+          setErrorMessage('Переданы некорректные данные');
+        }
       })
   }
+
+  // Авторизация пользователя
+  function handleAuthorization({ email, password }) {
+    mainApi.authorize({email, password})
+      .then((res) => {
+        if (res.token) {
+          setLoggedIn(true);
+          setCurrentUser(res);
+          localStorage.setItem('jwt', res.token);
+          localStorage.setItem('loggedIn', true);
+          history.push('./movies');
+        }
+      })
+      .catch((err) => {
+        if (err.message === "Ошибка: 401") {
+          setErrorMessage('Неверный email или пароль')
+        } else {
+          setErrorMessage('Что-то пошло не так...');
+        }
+        setLoggedIn(false);
+      })
+  }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -58,7 +85,7 @@ function App() {
             loggedIn={loggedIn}
           />
           <Route path='/signin'>
-            <Login />
+            <Login onLogin={handleAuthorization} errorMessage={errorMessage} />
           </Route>
           <Route path='/signup'>
             <Register onRegister={handleRegistration} errorMessage={errorMessage} />

@@ -28,33 +28,37 @@ const Register = ({ onRegister, errorMessage }) => {
             errorMessage={errorMessage.name || ''}
          >
             <AuthField
+               id='name'
                label='Имя'
                name='name'
                type='text'
                minLength='2'
                maxLength='30'
                required
-               autoComplete='on'
+               autoComplete="name"
                value={values.name || ''}
                error={errors.name || ''}
                onChange={handleChange}
             />
             <AuthField
+               id='email'
                label='E-mail'
                name='email'
                type='email'
                required
-               autoComplete='on'
+               autoComplete="email"
                value={values.email || ''}
                error={errors.email || ''}
                onChange={handleChange}
             />
             <AuthField
+               id='password'
                label='Пароль'
                name='password'
                type='password'
                minLength='8'
                required
+               autoComplete="password"
                value={values.password || ''}
                error={errors.password || ''}
                onChange={handleChange}

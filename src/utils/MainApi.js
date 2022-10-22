@@ -12,6 +12,12 @@ export const authorize = ({ email, password }) => {
       headers,
       body: JSON.stringify({ email, password }),
    }).then((res) => checkResponse(res))
+      .then((data) => {
+         if (data.token) {
+            localStorage.setItem('jwt', data.token);
+            return data;
+         }
+      })
 }
 
 // Регистрация пользователя
