@@ -1,4 +1,4 @@
-import { checkResponse, MOVIE_API } from './Constants';
+import { checkResponse, MOVIE_URL } from './Constants';
 
 class MoviesApi {
    constructor({ baseUrl }) {
@@ -11,6 +11,6 @@ class MoviesApi {
    }
 }
 
-const moviesApi = new MoviesApi({MOVIE_API});
+const moviesApi = new MoviesApi({ MOVIE_URL });
 
 export default moviesApi;
