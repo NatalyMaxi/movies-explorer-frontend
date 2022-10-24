@@ -1,12 +1,11 @@
-import { useFormValidation } from '../../hooks/useForm';
+import useForm from '../../hooks/useForm';
 import Auth from '../Auth/Auth';
 import AuthField from '../AuthField/AuthField';
-import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
 import Form from '../Form/Form';
 
 
 const Register = ({ onRegister, errorMessage }) => {
-   const { values, handleChange, errors, isValid } = useFormValidation();
+   const { values, handleChange, errors, isValid } = useForm();
 
    function handleSubmit(evt) {
       evt.preventDefault();
@@ -26,6 +25,8 @@ const Register = ({ onRegister, errorMessage }) => {
          <Form
             onSubmit={handleSubmit}
             errorMessage={errorMessage.name || ''}
+            text='Зарегистрироваться'
+            disabled={!isValid}
          >
             <AuthField
                id='name'
@@ -64,11 +65,6 @@ const Register = ({ onRegister, errorMessage }) => {
                onChange={handleChange}
             />
          </Form>
-         <ButtonSubmit
-            type='submit'
-            text='Зарегистрироваться'
-            disabled={!isValid}
-         />
       </Auth>
    )
 }

@@ -1,6 +1,13 @@
 .form {
    display: flex;
    flex-direction: column;
+   padding: 0;
+   margin: 0;
+}
+
+.form__container {
+display: flex;
+   flex-direction: column;
    gap: 10px;
    width: 396px;
    height: 335px;
@@ -21,9 +28,10 @@
 }
 
 @media screen and (max-width: 430px) {
-   .form {
+   .form__container {
       width: 260px;
       height: 423px;
       padding-bottom: 157px;
    }
 }
+

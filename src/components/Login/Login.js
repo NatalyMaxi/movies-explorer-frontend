@@ -1,12 +1,11 @@
-import { useFormValidation } from '../../hooks/useForm';
+import useForm from '../../hooks/useForm';
 import Auth from "../Auth/Auth";
 import AuthField from "../AuthField/AuthField";
-import ButtonSubmit from "../ButtonSubmit/ButtonSubmit";
 import Form from "../Form/Form";
 
 
 const Login = ({ onLogin, errorMessage }) => {
-   const { values, handleChange, errors, isValid } = useFormValidation();
+   const { values, handleChange, errors, isValid } = useForm();
 
    function handleSubmit(evt) {
       evt.preventDefault();
@@ -26,6 +25,8 @@ const Login = ({ onLogin, errorMessage }) => {
          <Form
             onSubmit={handleSubmit}
             errorMessage={errorMessage.name || ''}
+            text='Войти'
+            disabled={!isValid}
          >
             <AuthField
                id='email'
@@ -51,11 +52,6 @@ const Login = ({ onLogin, errorMessage }) => {
                onChange={handleChange}
             />
          </Form>
-         <ButtonSubmit
-            type='submit'
-            text='Войти'
-            disabled={!isValid}
-         />
       </Auth>
    )
 }
