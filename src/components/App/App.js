@@ -31,7 +31,8 @@ function App() {
         handleAuthorization({ email, password });
       })
       .catch((err) => {
-        if (err.message === "Ошибка: 409") {
+        if (err === 'Ошибка: 409') {
+          console.log(err)
           setErrorMessage('Пользователь с таким email уже зарегистрирован')
         } else {
           setErrorMessage('Переданы некорректные данные');
@@ -52,7 +53,7 @@ function App() {
         }
       })
       .catch((err) => {
-        if (err.message === "Ошибка: 401") {
+        if (err === 'Ошибка: 401') {
           setErrorMessage('Неверный email или пароль')
         } else {
           setErrorMessage('Что-то пошло не так...');

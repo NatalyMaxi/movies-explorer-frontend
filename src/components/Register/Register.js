@@ -24,7 +24,7 @@ const Register = ({ onRegister, errorMessage }) => {
       >
          <Form
             onSubmit={handleSubmit}
-            errorMessage={errorMessage.name || ''}
+            errorMessage={errorMessage || ''}
             text='Зарегистрироваться'
             disabled={!isValid}
          >
@@ -36,7 +36,7 @@ const Register = ({ onRegister, errorMessage }) => {
                minLength='2'
                maxLength='30'
                required
-               autoComplete="name"
+               autoComplete='name'
                value={values.name || ''}
                error={errors.name || ''}
                onChange={handleChange}
@@ -47,7 +47,7 @@ const Register = ({ onRegister, errorMessage }) => {
                name='email'
                type='email'
                required
-               autoComplete="email"
+               autoComplete='email'
                value={values.email || ''}
                error={errors.email || ''}
                onChange={handleChange}
@@ -59,7 +59,7 @@ const Register = ({ onRegister, errorMessage }) => {
                type='password'
                minLength='8'
                required
-               autoComplete="password"
+               autoComplete='password'
                value={values.password || ''}
                error={errors.password || ''}
                onChange={handleChange}

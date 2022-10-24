@@ -24,7 +24,7 @@ const Login = ({ onLogin, errorMessage }) => {
       >
          <Form
             onSubmit={handleSubmit}
-            errorMessage={errorMessage.name || ''}
+            errorMessage={errorMessage || ''}
             text='Войти'
             disabled={!isValid}
          >
@@ -34,7 +34,7 @@ const Login = ({ onLogin, errorMessage }) => {
                name='email'
                type='email'
                required
-               autoComplete="email"
+               autoComplete='email'
                value={values.email || ''}
                error={errors.email || ''}
                onChange={handleChange}
@@ -46,7 +46,7 @@ const Login = ({ onLogin, errorMessage }) => {
                type='password'
                minLength='8'
                required
-               autoComplete="password"
+               autoComplete='password'
                value={values.password || ''}
                error={errors.password || ''}
                onChange={handleChange}
