@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Main from '../Main';
@@ -16,18 +16,18 @@ import Footer from '../Footer/Footer';
 
 
 function App() {
-  // временное решение, пока нет функции изменения состояния
-  // eslint-disable-next-line
   const [loggedIn, setLoggedIn] = useState(false);
-  // eslint-disable-next-line
   const [currentUser, setCurrentUser] = useState({});
-
   // ошибка при регистрации или авторизации
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
 
+//! Получаем доступ к истории после проверки токена
+  useEffect(() => {
+    handleTokenCheck();
+  }, [history]);
 
-  // Регистрация пользователя
+  //! Регистрация пользователя
   function handleRegistration({ name, email, password }) {
     mainApi.register({ name, email, password })
       .then(() => {
@@ -43,7 +43,7 @@ function App() {
       })
   }
 
-  // Авторизация пользователя
+  //! Авторизация пользователя
   function handleAuthorization({ email, password }) {
     mainApi.authorize({ email, password })
       .then((res) => {
@@ -51,7 +51,6 @@ function App() {
           setLoggedIn(true);
           setCurrentUser(res);
           localStorage.setItem('jwt', res.token);
-          localStorage.setItem('loggedIn', true);
           history.push('./movies');
         }
       })
@@ -64,6 +63,22 @@ function App() {
         setLoggedIn(false);
       })
   }
+
+  //! Проверяем токен пользователя и получение его контента
+  function handleTokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    if (!jwt) {
+      return;
+    }
+    mainApi
+      .getUserInfo(jwt)
+      .then((data) => {
+        setCurrentUser(data)
+        setLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
 
 
   return (
