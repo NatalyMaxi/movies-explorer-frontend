@@ -44,9 +44,18 @@
    background: #202020;
 }
 
+.profile__input-error {
+   font-weight: 400;
+   font-size: 10px;
+   line-height: 12px;
+   color: #4285f4;
+   margin-top: -10px;
+   margin-bottom: 5px;
+}
+
 .profile__input:focus {
    outline: none;
-   border: 1px solid #ee3465;
+   box-shadow: 1px 1px 15px #ffffff;
 }
 
 .profile__line {
@@ -54,9 +63,25 @@
    border-bottom: 1px solid #424242;
 }
 
+.profile__status {
+   font-weight: 500;
+   font-size: 15px;
+   text-align: center;
+   margin: 30px auto 0;
+}
+
+.profile__status_type_effective {
+   color: #4285f4;
+}
+
+.profile__status_type_error {
+   color: #ee3465;
+}
+
 .profile__button-container {
    display: flex;
    flex-direction: column;
+   align-items: center;
    margin-top: 204px;
    gap: 18px;
 }

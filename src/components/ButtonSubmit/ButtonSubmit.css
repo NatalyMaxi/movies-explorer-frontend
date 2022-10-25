@@ -18,8 +18,11 @@
 }
 
 .button_disabled {
-   background: #6a6c70;
+   background: #2F2F2F;
    pointer-events: none;
+   box-shadow: 4px 4px 15px #ffffff;
+   text-shadow: 1px 1px 15px #4285f4, 0 0 1em #4285f4, 0 0 0.2em #4285f4;
+   
 }
 
 @media screen and (max-width: 430px) {
