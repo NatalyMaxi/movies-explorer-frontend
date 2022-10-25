@@ -11,18 +11,21 @@ import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import * as mainApi from '../../utils/MainApi';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 
 function App() {
   // временное решение, пока нет функции изменения состояния
   // eslint-disable-next-line
-  const [loggedIn, setLoggedIn] = useState(true);
-   // eslint-disable-next-line
+  const [loggedIn, setLoggedIn] = useState(false);
+  // eslint-disable-next-line
   const [currentUser, setCurrentUser] = useState({});
 
   // ошибка при регистрации или авторизации
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
+
 
   // Регистрация пользователя
   function handleRegistration({ name, email, password }) {
@@ -42,7 +45,7 @@ function App() {
 
   // Авторизация пользователя
   function handleAuthorization({ email, password }) {
-    mainApi.authorize({email, password})
+    mainApi.authorize({ email, password })
       .then((res) => {
         if (res.token) {
           setLoggedIn(true);
@@ -66,6 +69,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='App'>
+        <Header loggedIn={loggedIn} />
         <Switch>
           <Route exact path='/'>
             <Main />
@@ -95,9 +99,10 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
+        <Footer />
       </div>
-  </CurrentUserContext.Provider>
-    
+    </CurrentUserContext.Provider>
+
   );
 }
 

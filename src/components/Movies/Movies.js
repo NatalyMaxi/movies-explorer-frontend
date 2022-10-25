@@ -1,18 +1,14 @@
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 
-const Movies = ({ loggedIn }) => {
+const Movies = () => {
    return (
       <>
-         <Header loggedIn={loggedIn} />
          <main className='movies'>
             <SearchForm />
             <MoviesCardList isMovies={true} />
          </main>
-         <Footer />
       </>
 
 
