@@ -8,7 +8,7 @@ const Checkbox = () => {
             id='checkbox'
             type='checkbox'
          />
-         <label className='checkbox__label' for='checkbox'>Короткометражки</label>
+         <label className='checkbox__label'>Короткометражки</label>
       </div>
    );
 }

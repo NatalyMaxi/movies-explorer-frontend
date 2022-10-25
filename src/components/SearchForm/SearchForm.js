@@ -7,7 +7,7 @@ const SearchForm = () => {
    return (
       <section className='search'>
          <form className='search__form'>
-            <label className='search__input-label' for='movie'>
+            <label className='search__input-label'>
                <img className='search__icon search__icon_place_input' src={icon} alt='Иконка лупа' />
             </label>
             <input
