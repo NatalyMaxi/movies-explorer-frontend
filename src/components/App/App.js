@@ -22,7 +22,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
 
-//! Получаем доступ к истории после проверки токена
+  //! Получаем доступ к истории после проверки токена
   useEffect(() => {
     handleTokenCheck();
   }, [history]);
@@ -79,7 +79,30 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  //! Изменить данные пользователя в профиле
 
+  function handleUpdateUserData(data) {
+    const jwt = localStorage.getItem('jwt');
+    mainApi.updateUserInfo(data, jwt)
+      .then((res) => {
+        setCurrentUser(res.data)
+      })
+      .catch((err) => {
+        if (err === 'Ошибка: 409') {
+          setErrorMessage('Пользователь с таким email уже зарегистрирован')
+        } else {
+          setErrorMessage('Что-то пошло не так...');
+        }
+      })
+  }
+
+  //! Выйти из аккаунта
+  const handleSignOut = () => {
+    setLoggedIn(false);
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('loggedIn');
+    history.push('/');
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -103,6 +126,9 @@ function App() {
             path='/profile'
             component={Profile}
             loggedIn={loggedIn}
+            onUpdateUserData={handleUpdateUserData}
+            onSignOut={handleSignOut}
+            errorMessage={errorMessage}
           />
           <Route path='/signin'>
             <Login onLogin={handleAuthorization} errorMessage={errorMessage} />
