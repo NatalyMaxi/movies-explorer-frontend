@@ -5,10 +5,10 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useContext, useEffect, useState } from 'react';
 
 const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
-   const [isDisabled, setIsDisabled] = useState(true)
-   const [isEffective, setIsEffective] = useState(false)
+   const [isDisabledInput, setIsDisabledInput] = useState(true)
+   const [isSuccessfully, setIsSuccessfully] = useState(false)
    const currentUser = useContext(CurrentUserContext);
-   const { values, errors, isValid, handleChange, setValues } = useForm();
+   const { values, errors, isValid, handleChange, setValues, resetForm } = useForm();
 
    useEffect(() => {
       setValues(currentUser)
@@ -16,21 +16,23 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
 
    function handleSubmit(evt) {
       evt.preventDefault();
-      // if (!values.email || !values.name) {
-      //    return;
-      // }
       onUpdateUserData({
          name: values.name,
          email: values.email
       })
+      setTimeout(() => {
+         setIsDisabledInput((state) => !state)
+         setIsSuccessfully((state) => !state)
+      }, 1500);
+      resetForm()
    }
 
    function handleUpdatProfile() {
-      setIsDisabled(false)
+      setIsDisabledInput((state) => !state);
    }
 
    function handleSave() {
-      setIsEffective(true)
+      setIsSuccessfully((state) => !state);
    }
 
    return (
@@ -38,6 +40,7 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
          <h3 className='profile__title'>Привет, {currentUser.name}!</h3>
          <form
             className='profile__form'
+            noValidate
             onSubmit={handleSubmit}
          >
             <div className='profile__field'>
@@ -50,7 +53,7 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
                   minLength='2'
                   maxLength='30'
                   required
-                  disabled={isDisabled}
+                  disabled={isDisabledInput}
                   value={values.name || ''}
                   onChange={handleChange}
                />
@@ -64,21 +67,20 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
                   className='profile__input'
                   name='email'
                   type='email'
-                  disabled={isDisabled}
+                  disabled={isDisabledInput}
                   value={values.email || ''}
                   onChange={handleChange}
                />
             </div>
             {errors?.name && <span className="profile__input-error">{errors.email}</span>}
-            {isEffective ? <p className="profile__status profile__status_type_effective">Данные успешно изменены!</p> :
-               <p className="profile__status profile__status_type_error">{errorMessage.name}</p>}
+            {isSuccessfully && <p className="profile__status profile__status_type_effective">{errorMessage}</p>}
             <div className='profile__button-container'>
-               {isDisabled ? (
+               {isDisabledInput ? (
                   <>
                      <div className='profile__button-container'>
                         <button
                            className='profile__button profile__button_type_edit'
-                           type='submit'
+                           type='button'
                            onClick={handleUpdatProfile}
                         >
                            Редактировать

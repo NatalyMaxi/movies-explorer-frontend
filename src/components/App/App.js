@@ -19,7 +19,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   // ошибка при регистрации или авторизации
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState();
   const history = useHistory();
 
   //! Получаем доступ к истории после проверки токена
