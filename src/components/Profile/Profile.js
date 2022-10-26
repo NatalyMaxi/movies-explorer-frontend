@@ -54,7 +54,7 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
                   maxLength='30'
                   required
                   disabled={isDisabledInput}
-                  value={values.name || ''}
+                  value={values?.name ?? currentUser.name}
                   onChange={handleChange}
                />
             </div>
@@ -68,11 +68,11 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
                   name='email'
                   type='email'
                   disabled={isDisabledInput}
-                  value={values.email || ''}
+                  value={values?.email ?? currentUser.email}
                   onChange={handleChange}
                />
             </div>
-            {errors?.name && <span className="profile__input-error">{errors.email}</span>}
+            {errors?.email && <span className="profile__input-error">{errors.email}</span>}
             {isSuccessfully && <p className="profile__status profile__status_type_effective">{errorMessage}</p>}
             <div className='profile__button-container'>
                {isDisabledInput ? (
