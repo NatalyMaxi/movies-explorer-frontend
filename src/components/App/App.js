@@ -51,6 +51,7 @@ function App() {
           setLoggedIn(true);
           setCurrentUser(res);
           localStorage.setItem('jwt', res.token);
+          handleTokenCheck()
           history.push('./movies');
         }
       })
