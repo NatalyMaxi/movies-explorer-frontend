@@ -9,7 +9,7 @@ const PopupNavigation = ({ onClose, isOpen }) => {
          <div className='popup__overlay'>
             <div className='popup__container'>
                <button type='button' className='popup__close' onClick={onClose} />
-               <ul className='popup__list'>
+               <ul className='popup__list' onClick={onClose}>
                   <li className='popup__item'>
                      <NavLink exact to='/' className='popup__link' activeClassName='popup__link_active'>
                         Главная
@@ -27,7 +27,7 @@ const PopupNavigation = ({ onClose, isOpen }) => {
                   </li >
                </ul>
                <Link to='/profile'>
-                  <button className='popup__button' type='button'>Аккаунт</button>
+                  <button className='popup__button' type='button' onClick={onClose}>Аккаунт</button>
                </Link>
             </div>
          </div>
