@@ -135,7 +135,6 @@ function App() {
             onUpdateUserData={handleUpdateUserData}
             onSignOut={handleSignOut}
             isUserDataUpdateStatus={isUserDataUpdateStatus}
-            errorMessage={errorMessage}
           />
           <Route path='/signin'>
             <Login onLogin={handleAuthorization} errorMessage={errorMessage} />
