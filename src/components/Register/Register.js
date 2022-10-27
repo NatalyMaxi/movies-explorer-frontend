@@ -5,7 +5,7 @@ import Form from '../Form/Form';
 
 
 const Register = ({ onRegister, errorMessage }) => {
-   const { values, handleChange, errors, isValid } = useForm();
+   const { values, handleChange, resetForm, errors, isValid } = useForm();
 
    function handleSubmit(evt) {
       evt.preventDefault();
@@ -13,6 +13,7 @@ const Register = ({ onRegister, errorMessage }) => {
          return;
       }
       onRegister(values);
+      resetForm()
    }
 
    return (

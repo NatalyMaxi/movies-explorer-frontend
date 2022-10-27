@@ -42,6 +42,9 @@ function App() {
           setErrorMessage('Переданы некорректные данные');
         }
       })
+      .finally(() => {
+        setTimeout(() => setErrorMessage(''), 2000);
+      });
   }
 
   //! Авторизация пользователя
@@ -64,6 +67,9 @@ function App() {
         }
         setLoggedIn(false);
       })
+      .finally(() => {
+        setTimeout(() => setErrorMessage(''), 2000);
+      });
   }
 
   //! Проверяем токен пользователя и получение его контента
