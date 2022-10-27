@@ -19,6 +19,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   // ошибка при регистрации или авторизации
+  const [isUserDataUpdateStatus, setIsUserDataUpdateStatus] = useState('');
   const [errorMessage, setErrorMessage] = useState();
   const history = useHistory();
 
@@ -87,14 +88,18 @@ function App() {
     mainApi.updateUserInfo(data, jwt)
       .then((res) => {
         setCurrentUser(res.data)
+        setIsUserDataUpdateStatus('Данные успешно обновлены!')
       })
       .catch((err) => {
         if (err === 'Ошибка: 409') {
-          setErrorMessage('Пользователь с таким email уже зарегистрирован')
+          setIsUserDataUpdateStatus('Пользователь с таким email уже зарегистрирован')
         } else {
-          setErrorMessage('Что-то пошло не так...');
+          setIsUserDataUpdateStatus('Что-то пошло не так...');
         }
       })
+      .finally(() => {
+        setTimeout(() => setIsUserDataUpdateStatus(''), 2000);
+      });
   }
 
   //! Выйти из аккаунта
@@ -129,6 +134,7 @@ function App() {
             loggedIn={loggedIn}
             onUpdateUserData={handleUpdateUserData}
             onSignOut={handleSignOut}
+            isUserDataUpdateStatus={isUserDataUpdateStatus}
             errorMessage={errorMessage}
           />
           <Route path='/signin'>

@@ -4,7 +4,7 @@ import useForm from '../../hooks/useForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useContext, useEffect, useState } from 'react';
 
-const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
+const Profile = ({ onUpdateUserData, onSignOut, isUserDataUpdateStatus }) => {
    const [isDisabledInput, setIsDisabledInput] = useState(true)
    const [isSuccessfully, setIsSuccessfully] = useState(false)
    const currentUser = useContext(CurrentUserContext);
@@ -23,7 +23,7 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
       setTimeout(() => {
          setIsDisabledInput((state) => !state)
          setIsSuccessfully((state) => !state)
-      }, 1500);
+      }, 2000);
       resetForm()
    }
 
@@ -67,42 +67,40 @@ const Profile = ({ onUpdateUserData, onSignOut, errorMessage }) => {
                   className='profile__input'
                   name='email'
                   type='email'
+                  required
                   disabled={isDisabledInput}
                   value={values?.email ?? currentUser.email}
                   onChange={handleChange}
                />
             </div>
             {errors?.email && <span className="profile__input-error">{errors.email}</span>}
-            {isSuccessfully && <p className="profile__status profile__status_type_effective">{errorMessage}</p>}
+            {isSuccessfully && <p className='profile__form-status'>{isUserDataUpdateStatus}</p>}
             <div className='profile__button-container'>
                {isDisabledInput ? (
                   <>
-                     <div className='profile__button-container'>
-                        <button
-                           className='profile__button profile__button_type_edit'
-                           type='button'
-                           onClick={handleUpdatProfile}
-                        >
-                           Редактировать
-                        </button>
-                        <button
-                           className='profile__button profile__button_type_exit'
-                           type='button'
-                           onClick={onSignOut}
-                        >
-                           Выйти из аккаунта
-                        </button>
-                     </div>
+                     <button
+                        className='profile__button profile__button_type_edit'
+                        type='button'
+                        onClick={handleUpdatProfile}
+                     >
+                        Редактировать
+                     </button>
+                     <button
+                        className='profile__button profile__button_type_exit'
+                        type='button'
+                        onClick={onSignOut}
+                     >
+                        Выйти из аккаунта
+                     </button>
                   </>
                ) : (
-                  <div className='profile__button-container'>
-                     <ButtonSubmit
-                        type='submit'
-                        text='Сохранить'
-                        disabled={!isValid}
-                        onClick={handleSave}
-                     />
-                  </div>
+                  <ButtonSubmit
+                     type='submit'
+                     text='Сохранить'
+                     disabled={!isValid}
+                     onClick={handleSave}
+                  />
+
                )}
             </div>
          </form>

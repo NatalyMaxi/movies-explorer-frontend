@@ -19,6 +19,15 @@
    flex-direction: column;
 }
 
+.profile__form-status {
+   font-weight: 500;
+   font-size: 15px;
+   text-align: center;
+   height: 20px;
+   margin: 30px auto -50px;
+   color: #ffffff;
+}
+
 .profile__field {
    display: flex;
    justify-content: space-between;
@@ -61,21 +70,6 @@
 .profile__line {
    width: 100%;
    border-bottom: 1px solid #424242;
-}
-
-.profile__status {
-   font-weight: 500;
-   font-size: 15px;
-   text-align: center;
-   margin: 30px auto 0;
-}
-
-.profile__status_type_effective {
-   color: #4285f4;
-}
-
-.profile__status_type_error {
-   color: #ee3465;
 }
 
 .profile__button-container {
