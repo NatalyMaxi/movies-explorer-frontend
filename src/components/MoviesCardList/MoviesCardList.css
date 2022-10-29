@@ -15,12 +15,27 @@
    padding-bottom: 30px;
 }
 
+.cards__missing {
+   display: none;
+   font-weight: 500;
+   font-size: 22px;
+   line-height: 20px;
+   margin: 80px auto 50px;
+   padding: 0;
+   color: #4285f4;
+}
+
+.cards__missing_visible {
+display: block;
+}
+
 .cards__button-container {
    padding: 50px 0 70px;
    box-sizing: border-box;
 }
 
 .cards__button {
+   display: none;
    font-weight: 500;
    font-size: 12px;
    line-height: 15px;
@@ -35,7 +50,7 @@
 }
 
 .cards__button_hidden {
-   display: none;
+   display: block;
 }
 
 .cards__button:hover {
@@ -63,3 +78,4 @@
       width: 240px;
    }
 }
+

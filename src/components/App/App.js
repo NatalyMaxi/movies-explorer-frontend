@@ -18,7 +18,6 @@ import Footer from '../Footer/Footer';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  // ошибка при регистрации или авторизации
   const [isUserDataUpdateStatus, setIsUserDataUpdateStatus] = useState('');
   const [errorMessage, setErrorMessage] = useState();
   const history = useHistory();

@@ -1,16 +1,15 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ isMovies }) => {
+const MoviesCardList = () => {
    return (
       <section className='cards'>
-         <div className='cards__container'>
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-         </div>
+         <p className='cards__missing'></p>
+         <ul className='cards__container'>
+            <MoviesCard/>
+         </ul>
          <div className='cards__button-container'>
-            <button className={isMovies ? 'cards__button' : 'cards__button_hidden'} type='button'>Ещё</button>
+            <button className='cards__button' type='button'>Ещё</button>
          </div>
       </section>
    )

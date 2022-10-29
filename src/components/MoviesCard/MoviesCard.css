@@ -3,6 +3,7 @@
    height: 271px;
    position: relative;
    background: #222222;
+   list-style: none;
 }
 
 .card__description-movie {
@@ -106,6 +107,6 @@
    }
 
    .card__description-movie {
-   padding: 14px 0 14px 15px;
-}
+      padding: 14px 0 14px 15px;
+   }
 }

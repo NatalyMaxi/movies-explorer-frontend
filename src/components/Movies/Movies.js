@@ -7,7 +7,7 @@ const Movies = () => {
       <>
          <main className='movies'>
             <SearchForm />
-            <MoviesCardList isMovies={true} />
+            <MoviesCardList />
          </main>
       </>
 

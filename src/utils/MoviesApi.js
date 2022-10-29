@@ -1,16 +1,16 @@
 import { checkResponse, MOVIE_URL } from './Constants';
 
 class MoviesApi {
-   constructor({ baseUrl }) {
+   constructor(baseUrl) {
       this._baseUrl = baseUrl;
    }
 
-   getMovies() {
+   getAllMovies() {
       return fetch(this._baseUrl)
          .then((res) => checkResponse(res));
    }
 }
 
-const moviesApi = new MoviesApi({ MOVIE_URL });
+const moviesApi = new MoviesApi(MOVIE_URL);
 
 export default moviesApi;

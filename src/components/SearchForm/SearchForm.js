@@ -6,7 +6,10 @@ import Checkbox from '../Checkbox/Checkbox';
 const SearchForm = () => {
    return (
       <section className='search'>
-         <form className='search__form'>
+         <form
+            className='search__form'
+            noValidate
+         >
             <label className='search__input-label'>
                <img className='search__icon search__icon_place_input' src={icon} alt='Иконка лупа' />
             </label>
@@ -16,8 +19,11 @@ const SearchForm = () => {
                name='movie'
                type='text'
                placeholder='Фильм'
+               minLength='1'
+               maxLength='20'
                required
             />
+            <span className='search__form-error'></span>
             <button className='search__button' type='submit'>
                <img className='search__icon' src={find} alt='Иконка лупа' />
             </button>
@@ -28,5 +34,3 @@ const SearchForm = () => {
 };
 
 export default SearchForm;
-
-// SearchForm — форма поиска, куда пользователь будет вводить запрос.
