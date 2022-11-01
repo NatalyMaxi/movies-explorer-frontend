@@ -1,12 +1,30 @@
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
 
-const SavedMovies = () => {
+const SavedMovies = (
+   movies,
+   isLoading,
+   isNotFound,
+   onCheckbox,
+   checked,
+   isServerError
+) => {
    return (
       <main className='saved-movies'>
-         <SearchForm />
-         <MoviesCardList isMovies={false} />
+         <SearchForm
+            onCheckbox={onCheckbox}
+            checked={checked} />
+         {isLoading ? (
+            <Preloader />
+         ) : (
+            <MoviesCardList
+               movies={movies}
+               isNotFound={isNotFound}
+               isServerError={isServerError}
+            />
+         )}
       </main>
    )
 }

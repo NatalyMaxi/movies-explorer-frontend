@@ -7,10 +7,10 @@ const Movies = ({
    onSubmit,
    movies,
    isLoading,
-   isFailed,
    isNotFound,
    onCheckbox,
    checked,
+   isServerError
 }) => {
    return (
       <>
@@ -25,7 +25,7 @@ const Movies = ({
                <MoviesCardList
                   movies={movies}
                   isNotFound={isNotFound}
-                  isFailed={isFailed}
+                  isServerError={isServerError}
                />
             )}
          </main>

@@ -211,18 +211,24 @@ function App() {
             path='/movies'
             component={Movies}
             loggedIn={loggedIn}
-            onSubmit={handleRequestMovies}
             movies={movies}
             isLoading={isLoading}
-            isServerError={isServerError}
-            isNotFound={isNotFound}
             onCheckbox={handleChangeCheckbox}
             checked={selectedCheckbox}
+            isNotFound={isNotFound}
+            isServerError={isServerError}
+            onSubmit={handleRequestMovies}
           />
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
+            movies={movies}
+            isLoading={isLoading}
+            onCheckbox={handleChangeCheckbox}
+            checked={selectedCheckbox}
+            isNotFound={isNotFound}
+            isServerError={isServerError}
           />
           <ProtectedRoute
             path='/profile'
