@@ -26,6 +26,10 @@
 }
 
 .cards__missing_visible {
+   display: block;
+}
+
+.cards__missing_visible {
 display: block;
 }
 
@@ -35,7 +39,6 @@ display: block;
 }
 
 .cards__button {
-   display: none;
    font-weight: 500;
    font-size: 12px;
    line-height: 15px;
@@ -50,7 +53,7 @@ display: block;
 }
 
 .cards__button_hidden {
-   display: block;
+   visibility: hidden;
 }
 
 .cards__button:hover {

@@ -2,19 +2,23 @@ import './MoviesCard.css';
 import { convertDuration } from '../../utils/utils';
 
 const MoviesCard = (props) => {
+   const nameFilm = props.movie.nameRU
+   const durationFilm = props.movie.duration
+   const banner = `https://api.nomoreparties.co/${props.movie.image.url}`
+   const trailerLinkFilm = props.movie.trailerLink
    return (
       <li className='card'>
          <div className='card__description-movie'>
-            <span className='card__name-movie'>{props.name}</span>
-            <span className='card__duration-movie'>{convertDuration(props.duration)}</span>
+            <span className='card__name-movie'>{nameFilm}</span>
+            <span className='card__duration-movie'>{convertDuration(durationFilm)}</span>
          </div>
          <a
-            href={props.trailerLink}
+            href={trailerLinkFilm}
             className='card__trailer-link'
             target='_blank'
             rel='noreferrer'
          >
-            <img src={props.thumbnail} alt={props.name} className='card__poster-movie' />
+            <img src={banner} alt={nameFilm} className='card__poster-movie' />
          </a>
          <button className='card__button' type='button' />
          <button className='card__button_saved' type='button' />

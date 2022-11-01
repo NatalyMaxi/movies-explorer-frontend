@@ -1,15 +1,67 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
+import { useState, useEffect } from 'react';
+import { useWindowSize } from "../../hooks/useWindowsSize";
 
-const MoviesCardList = () => {
+const MoviesCardList = ({ movies, isNotFound, isServerError, }) => {
+   const windowWidth = useWindowSize();
+   const [initialCards, setInitialCards] = useState({});
+   const [moreCards, setMoreCards] = useState({});
+
+   useEffect(() => {
+      if (windowWidth >= 1280) {
+         setInitialCards(12);
+         setMoreCards(3);
+      }
+      if (windowWidth < 1280 && windowWidth >= 768) {
+         setInitialCards(8);
+         setMoreCards(2);
+      }
+      if (windowWidth < 768 && windowWidth >= 480) {
+         setInitialCards(6);
+         setMoreCards(2);
+      }
+      if (windowWidth < 480) {
+         setInitialCards(5);
+         setMoreCards(1);
+      }
+   }, [windowWidth])
+
+   let classIsNotFound = isNotFound
+      ? 'cards__missing_visible'
+      : 'cards__missing';
+
+   let classServerError = isServerError
+      ? 'cards__missing_visible'
+      : 'cards__missing';
+
+   function handleMoreButtonClick() {
+      setInitialCards(initialCards + moreCards);
+   }
+
    return (
       <section className='cards'>
-         <p className='cards__missing'></p>
+         <p className={classIsNotFound}>Ничего не найдено.</p>
+         <p className={classServerError}>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.</p>
          <ul className='cards__container'>
-            <MoviesCard/>
+            {movies.slice(0, initialCards).map((movie, i) => {
+               return (
+                  <MoviesCard
+                     movie={movie}
+                     key={movie.id}
+                  />
+               );
+            })}
          </ul>
          <div className='cards__button-container'>
-            <button className='cards__button' type='button'>Ещё</button>
+            <button
+               type='button'
+               onClick={handleMoreButtonClick}
+               className={
+                  movies.length <= 12 || initialCards >= movies.length
+                     ? 'cards__button_hidden'
+                     : 'cards__button'
+               }>Ещё</button>
          </div>
       </section>
    )

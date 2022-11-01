@@ -13,6 +13,10 @@
 }
 
 .card__name-movie {
+   width: 85%;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
    font-weight: 500;
    font-size: 15px;
    line-height: 18px;
@@ -83,7 +87,7 @@
    height: 203px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
    .card {
       width: 339px;
       height: 258px;
