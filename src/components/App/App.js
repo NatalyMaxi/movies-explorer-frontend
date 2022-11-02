@@ -30,21 +30,21 @@ function App() {
   //* Переменные состояния по фильмам
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
   const [movies, setMovies] = useState([]); // Список найденных фильмов
-  const [foundMovies, setFoundMovies] = useState(
-    JSON.parse(localStorage.getItem('foundMovies')) || []); // Список фильмов по критериям
+  const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
 
   //* Переменные состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
-  const [searchКeyword, setSearchКeyword] = useState('');
+  // const [searchКeyword, setSearchКeyword] = useState('');
+
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.filteredMovies) {
-      setMovies(foundMovies);
+    if (localStorage.foundMovies) {
+      setFoundMovies(foundMovies);
     }
   }, [foundMovies]);
 
-  // Поиск короткометражны фильмов
+  // Поиск короткометражныx фильмов
   const searchShortMovies = (movies) => {
     return movies.filter((movie) => movie.duration <= 40);
   };
@@ -70,7 +70,7 @@ function App() {
   // Найдем фильмы по критериям
   const handleSetFoundMovies = (movies, keyword, checkbox) => {
     setIsLoading(true);
-    const moviesList = findMovies(movies, keyword, false);
+    const moviesList = findMovies(movies, keyword, checkbox);
     if (moviesList.length === 0) {
       setIsNotFound(true);
     } else {
@@ -85,16 +85,17 @@ function App() {
   }
   //- Обработаем запрос пользователя по поиску фильмов
   const handleRequestMovies = (keyword) => {
-    localStorage.setItem('searchKeyword', keyword);
+    localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
+    localStorage.setItem('selectedCheckbox', selectedCheckbox); // Записываем в сторедж выставленное положение флажка
     if (allMovies.length === 0) { // если фильмов в сторедж нет, сделаем запрос к BeatfilmMoviesApi
       setIsLoading(true);
       moviesApi
         .getAllMovies()
         .then((movies) => {
           setIsLoading(true);
-          localStorage.setItem('allMovies', JSON.stringify(movies));
+          localStorage.setItem('allMovies', JSON.stringify(movies)); // Записываем в сторедж все полученные фильмы с BeatfilmMoviesApi
           setAllMovies(movies);
-          handleSetFoundMovies(movies, keyword, selectedCheckbox)
+          handleSetFoundMovies(movies, keyword, selectedCheckbox) // Находим фильмы по запросу и выставленным критериям
         })
         .catch((err) => {
           setIsServerError(true)
@@ -225,7 +226,7 @@ function App() {
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
-            movies={movies}
+            movies={foundMovies}
             isLoading={isLoading}
             onCheckbox={handleChangeCheckbox}
             checked={selectedCheckbox}
