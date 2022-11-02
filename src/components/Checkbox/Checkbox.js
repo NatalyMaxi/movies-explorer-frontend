@@ -1,6 +1,11 @@
 import './Checkbox.css';
 
 const Checkbox = ({ onCheckbox, checked }) => {
+   // const handleCheckbox = (evt) => {
+   //    onCheckbox(evt.target.checked);
+   //    console.log(evt.target.checked);
+   // }
+
    return (
       <div className='checkbox'>
          <input
