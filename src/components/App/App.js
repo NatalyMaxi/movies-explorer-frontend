@@ -49,6 +49,7 @@ function App() {
   // меняем состояние чекбокса на короткометражки
   const handleChangeCheckbox = (evt) => {
     setSelectedCheckbox(!selectedCheckbox);
+    console.log(selectedCheckbox)
   };
 
   // Найдем фильмы по ключевому слову
