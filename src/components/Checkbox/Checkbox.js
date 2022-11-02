@@ -19,3 +19,4 @@ const Checkbox = ({ onCheckbox, checked }) => {
 export default Checkbox;
 
 // Checkbox — компонент для чекбокса короткометражки.
+//Проверить как работает фиксация
