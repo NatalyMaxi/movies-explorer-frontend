@@ -10,7 +10,8 @@ const Movies = ({
    isNotFound,
    onCheckbox,
    checked,
-   isServerError
+   isServerError,
+   searchКeyword
 }) => {
    return (
       <>
@@ -18,7 +19,9 @@ const Movies = ({
             <SearchForm
                onSubmit={onSubmit}
                onCheckbox={onCheckbox}
-               checked={checked} />
+               checked={checked}
+               defaultValue={searchКeyword}
+            />
             {isLoading ? (
                <Preloader />
             ) : (

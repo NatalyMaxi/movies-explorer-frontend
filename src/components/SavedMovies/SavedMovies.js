@@ -9,13 +9,16 @@ const SavedMovies = (
    isNotFound,
    onCheckbox,
    checked,
-   isServerError
+   isServerError,
+   searchКeyword
 ) => {
    return (
       <main className='saved-movies'>
          <SearchForm
             onCheckbox={onCheckbox}
-            checked={checked} />
+            checked={checked}
+            defaultValue=''
+         />
          {isLoading ? (
             <Preloader />
          ) : (

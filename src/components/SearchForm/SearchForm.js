@@ -2,9 +2,9 @@ import './SearchForm.css';
 import icon from '../../images/icon.svg';
 import find from '../../images/find.svg'
 import Checkbox from '../Checkbox/Checkbox';
-import { useState, } from 'react';
+import { useState, useEffect } from 'react';
 
-const SearchForm = ({ onSubmit, onCheckbox, checked }) => {
+const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
    const [errorText, setErrorText] = useState('');
    const [keyword, setKeyword] = useState('');
    const [isFormValid, setIsFormValid] = useState(false);
@@ -22,7 +22,9 @@ const SearchForm = ({ onSubmit, onCheckbox, checked }) => {
       }
       onSubmit(keyword);
    };
-
+   useEffect(() => {
+      setKeyword(defaultValue)
+   }, [defaultValue])
    return (
       <section className='search'>
          <form
@@ -43,6 +45,7 @@ const SearchForm = ({ onSubmit, onCheckbox, checked }) => {
                maxLength='20'
                required
                onChange={handleChange}
+               value={keyword}
             />
             <span className='search__form-error'>{!isFormValid && errorText}</span>
             <button className='search__button' type='submit'>

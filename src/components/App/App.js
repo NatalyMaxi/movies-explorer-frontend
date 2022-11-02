@@ -35,7 +35,7 @@ function App() {
 
   //* Переменные состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
-
+  const [searchКeyword, setSearchКeyword] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -55,22 +55,22 @@ function App() {
   };
 
   // Найдем фильмы по ключевому слову
-  function findMovies(movies, name, checkbox) {
-    const moviesByUserQuery = movies.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(name.toLowerCase()) || movie.nameEN.toLowerCase().includes(name.toLowerCase())
+  function findMovies(movies, keyword, checkbox) {
+    const moviesКeywordSearch = movies.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
     });
 
     if (checkbox) {
-      return searchShortMovies(moviesByUserQuery);
+      return searchShortMovies(moviesКeywordSearch);
     } else {
-      return moviesByUserQuery;
+      return moviesКeywordSearch;
     }
   }
 
   // Найдем фильмы по критериям
-  const handleSetFoundMovies = (movies, name, checkbox) => {
+  const handleSetFoundMovies = (movies, keyword, checkbox) => {
     setIsLoading(true);
-    const moviesList = findMovies(movies, name, false);
+    const moviesList = findMovies(movies, keyword, false);
     if (moviesList.length === 0) {
       setIsNotFound(true);
     } else {
@@ -85,6 +85,7 @@ function App() {
   }
   //- Обработаем запрос пользователя по поиску фильмов
   const handleRequestMovies = (keyword) => {
+    localStorage.setItem('searchKeyword', keyword);
     if (allMovies.length === 0) { // если фильмов в сторедж нет, сделаем запрос к BeatfilmMoviesApi
       setIsLoading(true);
       moviesApi
@@ -218,6 +219,7 @@ function App() {
             isNotFound={isNotFound}
             isServerError={isServerError}
             onSubmit={handleRequestMovies}
+            searchКeyword={localStorage.getItem('searchKeyword' || '')}
           />
           <ProtectedRoute
             path='/saved-movies'
