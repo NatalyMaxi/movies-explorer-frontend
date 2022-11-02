@@ -9,6 +9,10 @@ const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue, }) => {
    const [keyword, setKeyword] = useState('');
    const [isFormValid, setIsFormValid] = useState(false);
 
+   useEffect(() => {
+      setKeyword(defaultValue)
+   }, [defaultValue])
+
    const handleChange = (evt) => {
       setKeyword(evt.target.value);
       setIsFormValid(evt.target.closest('form').checkValidity());
@@ -23,9 +27,6 @@ const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue, }) => {
       }
    };
 
-   useEffect(() => {
-      setKeyword(defaultValue)
-   }, [defaultValue])
    return (
       <section className='search'>
          <form
@@ -46,7 +47,7 @@ const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue, }) => {
                maxLength='20'
                required
                onChange={handleChange}
-               value={keyword}
+               value={keyword || ''}
             />
             <span className='search__form-error'>{!isFormValid && errorText}</span>
             <button className='search__button' type='submit'>

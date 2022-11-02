@@ -34,15 +34,12 @@ function App() {
 
   //* Переменные состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
-  // const [searchКeyword, setSearchКeyword] = useState('');
 
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.foundMovies) {
-      setFoundMovies(foundMovies);
-    }
-  }, [foundMovies]);
+    handleTokenCheck();
+  }, [history]);
 
   // Поиск короткометражныx фильмов
   const searchShortMovies = (movies) => {
@@ -83,6 +80,7 @@ function App() {
     localStorage.setItem('foundMovies', JSON.stringify(moviesList));
     setTimeout(() => setIsLoading(false), 1000)
   }
+  
   //- Обработаем запрос пользователя по поиску фильмов
   const handleRequestMovies = (keyword) => {
     localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
@@ -107,11 +105,6 @@ function App() {
       handleSetFoundMovies(allMovies, keyword, selectedCheckbox);
     }
   };
-
-  //! Получаем доступ к истории после проверки токена
-  useEffect(() => {
-    handleTokenCheck();
-  }, [history]);
 
   //! Регистрация пользователя
   function handleRegistration({ name, email, password }) {
@@ -195,6 +188,7 @@ function App() {
 
   //! Выйти из аккаунта
   const handleSignOut = () => {
+    localStorage.clear()
     setLoggedIn(false);
     localStorage.removeItem('jwt');
     localStorage.removeItem('loggedIn');
