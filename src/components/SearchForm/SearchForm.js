@@ -4,7 +4,7 @@ import find from '../../images/find.svg'
 import Checkbox from '../Checkbox/Checkbox';
 import { useState, useEffect } from 'react';
 
-const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
+const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue, }) => {
    const [errorText, setErrorText] = useState('');
    const [keyword, setKeyword] = useState('');
    const [isFormValid, setIsFormValid] = useState(false);
@@ -16,12 +16,13 @@ const SearchForm = ({ onSubmit, onCheckbox, checked, defaultValue }) => {
 
    const handleSubmit = (evt) => {
       evt.preventDefault();
-      setIsFormValid(evt.target.closest('form').checkValidity());
-      if (!isFormValid) {
-         return setErrorText('Нужно ввести ключевое слово');
+      if (keyword) {
+         onSubmit(keyword);
+      } else {
+         return setErrorText('Нужно ввести ключевое слово')
       }
-      onSubmit(keyword);
    };
+
    useEffect(() => {
       setKeyword(defaultValue)
    }, [defaultValue])
