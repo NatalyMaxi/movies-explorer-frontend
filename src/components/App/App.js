@@ -31,6 +31,7 @@ function App() {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
   const [movies, setMovies] = useState([]); // Список найденных фильмов
   const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
+  const [savedMovies, setSavedMovies] = useState([]);
 
   //* Переменные состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
@@ -67,7 +68,7 @@ function App() {
   };
 
   // Найдем фильмы по ключевому слову
-  function findMovies(movies, keyword, checkbox) {
+  const findMovies = (movies, keyword, checkbox) => {
     const moviesКeywordSearch = movies.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
     })
@@ -120,8 +121,52 @@ function App() {
     }
   };
 
+  //- Обработать запрос на получение сохраненных фильмов на странице "Сохраненные фильмы"
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (loggedIn) {
+      mainApi.getSavedMovies(jwt)
+        .then((data) => {
+          setSavedMovies(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, [loggedIn]);
+
+  //- Обработать запрос на сохранение фильма на страницу "Сохраненные фильмы"
+  const handleSaveMovie = (movie) => {
+    const jwt = localStorage.getItem('jwt');
+    mainApi.saveMovie(movie, jwt)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+
+  //- Обработать запрос на удаления фильма с страницы "Сохраненные фильмы"
+  const handleDeleteMovie = (movie) => {
+    setIsLoading(true);
+    const jwt = localStorage.getItem('jwt');
+    mainApi.deleteMovie(movie._id, jwt)
+      .then((movie) => {
+        const updatedSavedMovies = savedMovies.filter(item => movie._id !== item._id);
+        localStorage.setItem('savedMovies', updatedSavedMovies);
+        setSavedMovies(updatedSavedMovies);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   //! Регистрация пользователя
-  function handleRegistration({ name, email, password }) {
+  const handleRegistration = ({ name, email, password }) => {
     mainApi.register({ name, email, password })
       .then(() => {
         handleAuthorization({ email, password });
@@ -140,7 +185,7 @@ function App() {
   }
 
   //! Авторизация пользователя
-  function handleAuthorization({ email, password }) {
+  const handleAuthorization = ({ email, password }) => {
     mainApi.authorize({ email, password })
       .then((res) => {
         if (res.token) {
@@ -165,7 +210,7 @@ function App() {
   }
 
   //! Проверяем токен пользователя и получение его контента
-  function handleTokenCheck() {
+  const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) {
       return;
@@ -181,7 +226,7 @@ function App() {
 
   //! Изменить данные пользователя в профиле
 
-  function handleUpdateUserData(data) {
+  const handleUpdateUserData = (data) => {
     const jwt = localStorage.getItem('jwt');
     mainApi.updateUserInfo(data, jwt)
       .then((res) => {
@@ -227,11 +272,15 @@ function App() {
             isServerError={isServerError}
             onSubmit={handleRequestMovies}
             searchKeyword={searchKeyword}
+            onSaveMovie={handleSaveMovie}
+            onDeleteMovie={handleDeleteMovie}
           />
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
+            movies={savedMovies}
+            onDeleteMovie={handleDeleteMovie}
           />
           <ProtectedRoute
             path='/profile'

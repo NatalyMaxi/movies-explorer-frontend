@@ -26,6 +26,7 @@ const Movies = ({
                <Preloader />
             ) : (
                <MoviesCardList
+                  isMoviesPage={true}
                   movies={movies}
                   isNotFound={isNotFound}
                   isServerError={isServerError}

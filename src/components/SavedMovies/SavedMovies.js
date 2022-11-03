@@ -9,7 +9,8 @@ const SavedMovies = (
       <main className='saved-movies'>
          <SearchForm
          />
-            <MoviesCardList
+         <MoviesCardList
+            isMoviesPage={false}
             />
       </main>
    )
