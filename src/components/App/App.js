@@ -52,17 +52,25 @@ function App() {
   };
 
   // меняем состояние чекбокса на короткометражки
-  const handleChangeCheckbox = (evt) => {
+  const handleChangeCheckbox = () => {
     setSelectedCheckbox(!selectedCheckbox);
     console.log(selectedCheckbox)
+    if (!selectedCheckbox) {
+      setMovies(searchShortMovies(foundMovies));
+      if (foundMovies.length === 0) {
+        setIsNotFound(true);
+      }
+    } else {
+      setMovies(foundMovies);
+    }
+    localStorage.setItem('selectedCheckbox', !selectedCheckbox);
   };
 
   // Найдем фильмы по ключевому слову
   function findMovies(movies, keyword, checkbox) {
     const moviesКeywordSearch = movies.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
-    });
-
+    })
     if (checkbox) {
       return searchShortMovies(moviesКeywordSearch);
     } else {
@@ -73,7 +81,7 @@ function App() {
   // Найдем фильмы по критериям
   const handleSetFoundMovies = (movies, keyword, checkbox) => {
     setIsLoading(true);
-    const moviesList = findMovies(movies, keyword, checkbox);
+    const moviesList = findMovies(movies, keyword, false);
     if (moviesList.length === 0) {
       setIsNotFound(true);
     } else {
