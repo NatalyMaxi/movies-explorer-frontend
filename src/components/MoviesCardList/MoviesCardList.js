@@ -58,7 +58,7 @@ const MoviesCardList = ({ movies, isNotFound, isServerError, }) => {
                type='button'
                onClick={handleMoreButtonClick}
                className={
-                  movies.length <= 12 || initialCards >= movies.length
+                  movies.length <= 7 || initialCards >= movies.length
                      ? 'cards__button_hidden'
                      : 'cards__button'
                }>Ещё</button>
