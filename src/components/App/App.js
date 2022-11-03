@@ -196,10 +196,6 @@ function App() {
   const handleSignOut = () => {
     localStorage.clear()
     setLoggedIn(false);
-    setCurrentUser({});
-    setMovies([]);
-    selectedCheckbox(false)
-    isNotFound(false)
     history.push('/');
   };
 
