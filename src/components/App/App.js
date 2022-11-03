@@ -34,12 +34,15 @@ function App() {
 
   //* Переменные состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
-
+  const [searchKeyword, setSearchKeyword] = useState('')
   const history = useHistory();
 
   useEffect(() => {
     handleTokenCheck();
-  }, [history]);
+    setSearchKeyword(localStorage.getItem('searchKeyword' || ''));
+    setSelectedCheckbox(localStorage.getItem('selectedCheckbox' || '') === 'true');
+    setFoundMovies(localStorage.getItem('foundMovies' || ''))
+  }, []);
 
   // Поиск короткометражныx фильмов
   const searchShortMovies = (movies) => {
@@ -215,7 +218,7 @@ function App() {
             isNotFound={isNotFound}
             isServerError={isServerError}
             onSubmit={handleRequestMovies}
-            searchКeyword={localStorage.getItem('searchKeyword' || '')}
+            searchKeyword={searchKeyword}
           />
           <ProtectedRoute
             path='/saved-movies'
