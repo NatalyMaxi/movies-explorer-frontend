@@ -232,12 +232,6 @@ function App() {
             path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
-            movies={foundMovies}
-            isLoading={isLoading}
-            onCheckbox={handleChangeCheckbox}
-            checked={selectedCheckbox}
-            isNotFound={isNotFound}
-            isServerError={isServerError}
           />
           <ProtectedRoute
             path='/profile'
