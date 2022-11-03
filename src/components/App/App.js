@@ -41,7 +41,9 @@ function App() {
     handleTokenCheck();
     setSearchKeyword(localStorage.getItem('searchKeyword' || ''));
     setSelectedCheckbox(localStorage.getItem('selectedCheckbox' || '') === 'true');
-    setFoundMovies(localStorage.getItem('foundMovies' || ''))
+    if (JSON.parse(localStorage.getItem('foundMovies'))) {
+      setMovies(JSON.parse(localStorage.getItem('foundMovies')));
+    }
   }, []);
 
   // Поиск короткометражныx фильмов
@@ -84,7 +86,7 @@ function App() {
     localStorage.setItem('foundMovies', JSON.stringify(moviesList));
     setTimeout(() => setIsLoading(false), 1000)
   }
-  
+
   //- Обработаем запрос пользователя по поиску фильмов
   const handleRequestMovies = (keyword) => {
     localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
@@ -194,8 +196,10 @@ function App() {
   const handleSignOut = () => {
     localStorage.clear()
     setLoggedIn(false);
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('loggedIn');
+    setCurrentUser({});
+    setMovies([]);
+    selectedCheckbox(false)
+    isNotFound(false)
     history.push('/');
   };
 
