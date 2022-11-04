@@ -51,16 +51,25 @@ export const updateUserInfo = (data, jwt) => {
 
 // Сохраняем фильм пользователя
 export const saveMovie = (movie, jwt) => {
-   delete movie.id
-   delete movie.owner
-   delete movie._id
    return fetch(`${BASE_URL}/movies`, {
       method: 'POST',
       headers: {
          ...headers,
          'Authorization': `Bearer ${jwt}`,
       },
-      body: JSON.stringify(movie),
+      body: JSON.stringify({
+         movieId: movie.id,
+         nameRU: movie.nameRU || 'Нет данных',
+         nameEN: movie.nameEN || 'Нет данных',
+         country: movie.country,
+         director: movie.director,
+         duration: movie.duration,
+         year: movie.year,
+         description: movie.description,
+         image: `https://api.nomoreparties.co${movie.image.url}`,
+         trailerLink: movie.trailerLink,
+         thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+      }),
    }).then((res) => checkResponse(res))
 };
 

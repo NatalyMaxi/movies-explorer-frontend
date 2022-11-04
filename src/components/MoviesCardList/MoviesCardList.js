@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import { useState, useEffect } from 'react';
 import { useWindowSize } from "../../hooks/useWindowsSize";
 
-const MoviesCardList = ({ movies, isNotFound, isServerError, }) => {
+const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage }) => {
    const windowWidth = useWindowSize();
    const [initialCards, setInitialCards] = useState({});
    const [moreCards, setMoreCards] = useState({});
@@ -48,7 +48,7 @@ const MoviesCardList = ({ movies, isNotFound, isServerError, }) => {
                return (
                   <MoviesCard
                      movie={movie}
-                     key={movie.id}
+                     key={isMoviesPage ? movie.id : movie.movieId}
                   />
                );
             })}

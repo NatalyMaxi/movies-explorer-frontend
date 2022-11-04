@@ -121,20 +121,6 @@ function App() {
     }
   };
 
-  //- Обработать запрос на получение сохраненных фильмов на странице "Сохраненные фильмы"
-  useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (loggedIn) {
-      mainApi.getSavedMovies(jwt)
-        .then((data) => {
-          setSavedMovies(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    }
-  }, [loggedIn]);
-
   //- Обработать запрос на сохранение фильма на страницу "Сохраненные фильмы"
   const handleSaveMovie = (movie) => {
     const jwt = localStorage.getItem('jwt');
@@ -221,7 +207,17 @@ function App() {
         setCurrentUser(data)
         setLoggedIn(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      })
+    mainApi
+      .getSavedMovies(jwt)
+      .then((data) => {
+        setSavedMovies(data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
 
   //! Изменить данные пользователя в профиле
@@ -274,6 +270,7 @@ function App() {
             searchKeyword={searchKeyword}
             onSaveMovie={handleSaveMovie}
             onDeleteMovie={handleDeleteMovie}
+            savedMovies={savedMovies}
           />
           <ProtectedRoute
             path='/saved-movies'
@@ -281,6 +278,7 @@ function App() {
             loggedIn={loggedIn}
             movies={savedMovies}
             onDeleteMovie={handleDeleteMovie}
+            savedMovies={savedMovies}
           />
           <ProtectedRoute
             path='/profile'

@@ -32,7 +32,7 @@
 }
 
 .card__button {
-   display: none;
+   display: block;
    position: absolute;
    width: 30px;
    height: 30px;
@@ -61,7 +61,7 @@
 }
 
 .card__button_delete {
-   display: none;
+   display: block;
    position: absolute;
    width: 30px;
    height: 30px;

@@ -11,7 +11,8 @@ const Movies = ({
    onCheckbox,
    checked,
    isServerError,
-   searchKeyword
+   searchKeyword,
+   savedMovies
 }) => {
    return (
       <>
@@ -30,6 +31,7 @@ const Movies = ({
                   movies={movies}
                   isNotFound={isNotFound}
                   isServerError={isServerError}
+                  savedMovies={savedMovies}
                />
             )}
          </main>
