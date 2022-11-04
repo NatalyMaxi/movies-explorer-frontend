@@ -281,7 +281,6 @@ function App() {
             searchKeyword={searchKeyword}
             onSaveMovie={handleSaveMovie}
             onDeleteMovie={handleDeleteMovie}
-            savedMovies={savedMovies}
             isSavedMovies={isSavedMovies}
           />
           <ProtectedRoute
@@ -290,7 +289,6 @@ function App() {
             loggedIn={loggedIn}
             movies={savedMovies}
             onDeleteMovie={handleDeleteMovie}
-            savedMovies={savedMovies}
             isSavedMovies={isSavedMovies}
           />
           <ProtectedRoute
