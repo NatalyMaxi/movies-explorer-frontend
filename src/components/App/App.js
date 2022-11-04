@@ -96,6 +96,11 @@ function App() {
     setTimeout(() => setIsLoading(false), 1000)
   }
 
+  // Проверить сохране ли фильм
+  const isSavedMovies = (movie) => {
+    return savedMovies.some(item => item.movieId === movie.id && item.owner === currentUser._id)
+  }
+
   //- Обработаем запрос пользователя по поиску фильмов
   const handleRequestMovies = (keyword) => {
     localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
@@ -271,6 +276,7 @@ function App() {
             onSaveMovie={handleSaveMovie}
             onDeleteMovie={handleDeleteMovie}
             savedMovies={savedMovies}
+            isSavedMovies={isSavedMovies}
           />
           <ProtectedRoute
             path='/saved-movies'
@@ -279,6 +285,7 @@ function App() {
             movies={savedMovies}
             onDeleteMovie={handleDeleteMovie}
             savedMovies={savedMovies}
+            isSavedMovies={isSavedMovies}
           />
           <ProtectedRoute
             path='/profile'

@@ -14,7 +14,8 @@ const Movies = ({
    searchKeyword,
    savedMovies,
    onDeleteMovie,
-   onSaveMovie
+   onSaveMovie,
+   isSavedMovies
 }) => {
    return (
       <>
@@ -36,6 +37,7 @@ const Movies = ({
                   savedMovies={savedMovies}
                   onDeleteMovie={onDeleteMovie}
                   onSaveMovie={onSaveMovie}
+                  isSavedMovies={isSavedMovies}
                />
             )}
          </main>

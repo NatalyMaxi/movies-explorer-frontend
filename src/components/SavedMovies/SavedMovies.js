@@ -2,13 +2,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-const SavedMovies = (
-   {
-      movies,
-      savedMovies,
-      onDeleteMovie,
-      onSaveMovie
-   }
+const SavedMovies = ({ movies, savedMovies, onDeleteMovie, onSaveMovie, isSaved: isSavedMovies }
 ) => {
    return (
       <main className='saved-movies'>
@@ -20,6 +14,7 @@ const SavedMovies = (
             savedMovies={savedMovies}
             onDeleteMovie={onDeleteMovie}
             onSaveMovie={onSaveMovie}
+            isSavedMovies={isSavedMovies}
          />
       </main>
    )
