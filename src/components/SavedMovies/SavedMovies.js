@@ -7,6 +7,7 @@ const SavedMovies = (
       movies,
       savedMovies,
       onDeleteMovie,
+      onSaveMovie
    }
 ) => {
    return (
@@ -18,6 +19,7 @@ const SavedMovies = (
             isMoviesPage={false}
             savedMovies={savedMovies}
             onDeleteMovie={onDeleteMovie}
+            onSaveMovie={onSaveMovie}
          />
       </main>
    )

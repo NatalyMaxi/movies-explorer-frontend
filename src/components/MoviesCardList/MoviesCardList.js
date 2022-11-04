@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useWindowSize } from "../../hooks/useWindowsSize";
 import { useLocation } from 'react-router-dom';
 
-const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage }) => {
+const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage, onDeleteMovie, onSaveMovie }) => {
    const windowWidth = useWindowSize();
    const [initialCards, setInitialCards] = useState({});
    const [moreCards, setMoreCards] = useState({});
@@ -51,6 +51,8 @@ const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage }) => 
                   <MoviesCard
                      movie={movie}
                      key={isMoviesPage ? movie.id : movie.movieId}
+                     onDeleteMovie={onDeleteMovie}
+                     onSaveMovie={onSaveMovie}
                   />
                );
             })}

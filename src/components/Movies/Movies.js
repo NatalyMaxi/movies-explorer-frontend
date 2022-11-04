@@ -12,7 +12,9 @@ const Movies = ({
    checked,
    isServerError,
    searchKeyword,
-   savedMovies
+   savedMovies,
+   onDeleteMovie,
+   onSaveMovie
 }) => {
    return (
       <>
@@ -32,6 +34,8 @@ const Movies = ({
                   isNotFound={isNotFound}
                   isServerError={isServerError}
                   savedMovies={savedMovies}
+                  onDeleteMovie={onDeleteMovie}
+                  onSaveMovie={onSaveMovie}
                />
             )}
          </main>

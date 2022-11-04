@@ -19,12 +19,11 @@ const MoviesCard = ({ movie, savedMovies, onSaveMovie, onDeleteMovie }) => {
    const handleDeleteMovie = () => {
       onDeleteMovie(movie)
    };
-
    let buttonClassName =
       isSaved
          ? 'card__button card__button_save'
          : 'card__button';
-
+   
    return (
       <li className='card'>
          <div className='card__description-movie'>
