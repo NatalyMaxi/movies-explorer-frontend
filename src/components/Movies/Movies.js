@@ -12,7 +12,6 @@ const Movies = ({
    checked,
    isServerError,
    searchKeyword,
-   savedMovies,
    onDeleteMovie,
    onSaveMovie,
    isSavedMovies
@@ -34,7 +33,6 @@ const Movies = ({
                   movies={movies}
                   isNotFound={isNotFound}
                   isServerError={isServerError}
-                  savedMovies={savedMovies}
                   onDeleteMovie={onDeleteMovie}
                   onSaveMovie={onSaveMovie}
                   isSavedMovies={isSavedMovies}
