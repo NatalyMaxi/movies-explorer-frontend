@@ -2,11 +2,13 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import { useState, useEffect } from 'react';
 import { useWindowSize } from "../../hooks/useWindowsSize";
+import { useLocation } from 'react-router-dom';
 
 const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage }) => {
    const windowWidth = useWindowSize();
    const [initialCards, setInitialCards] = useState({});
    const [moreCards, setMoreCards] = useState({});
+   const location = useLocation();
 
    useEffect(() => {
       if (windowWidth >= 1280) {
@@ -53,16 +55,18 @@ const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage }) => 
                );
             })}
          </ul>
-         <div className='cards__button-container'>
-            <button
-               type='button'
-               onClick={handleMoreButtonClick}
-               className={
-                  movies.length <= 7 || initialCards >= movies.length
-                     ? 'cards__button_hidden'
-                     : 'cards__button'
-               }>Ещё</button>
-         </div>
+         {location.pathname === '/movies' && (
+            <div className='cards__button-container'>
+               <button
+                  type='button'
+                  onClick={handleMoreButtonClick}
+                  className={
+                     movies.length <= 7 || initialCards >= movies.length
+                        ? 'cards__button_hidden'
+                        : 'cards__button'
+                  }>Ещё</button>
+            </div>
+         )}
       </section>
    )
 }
