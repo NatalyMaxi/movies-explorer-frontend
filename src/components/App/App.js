@@ -181,7 +181,6 @@ function App() {
       .then((res) => {
         if (res.token) {
           setLoggedIn(true);
-          setCurrentUser(res);
           localStorage.setItem('jwt', res.token);
           handleTokenCheck()
           history.push('./movies');
@@ -218,6 +217,7 @@ function App() {
     mainApi
       .getSavedMovies(jwt)
       .then((data) => {
+        setLoggedIn(true);
         setSavedMovies(data)
       })
       .catch((err) => {
@@ -251,6 +251,12 @@ function App() {
     localStorage.clear()
     setLoggedIn(false);
     history.push('/');
+    setMovies([]);
+    setSavedMovies([]);
+    setFoundMovies(false);
+    setSelectedCheckbox(false)
+    setSearchKeyword('')
+    setFoundMovies([])
   };
 
   return (
