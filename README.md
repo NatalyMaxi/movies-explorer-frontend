@@ -29,6 +29,12 @@ GitHub <img src="https://github.githubassets.com/images/modules/logos_page/GitHu
 ###### [Ссылка на репозиторий](https://github.com/NatalyMaxi/movies-explorer-frontend)
 ###### [Ссылка на пулреквест](https://github.com/NatalyMaxi/movies-explorer-frontend/pull/3)
 
+Ip 51.250.86.225
+ссылка фронтенд domainname.nataly.nomoredomains.icu
+ссылка бэкэнд api.domainname.nataly.nomoredomains.icu
+ссылка на пулреквест https://github.com/NatalyMaxi/movies-explorer-frontend/pull/3
+
+
 
 
 
