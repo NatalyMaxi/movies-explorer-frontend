@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
-import { Switch, Route, useHistory, } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import Main from '../Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -22,26 +22,33 @@ function App() {
   const [isUserDataUpdateStatus, setIsUserDataUpdateStatus] = useState('');
 
   //* Переменные состояния ошибок и загрузок
-  const [errorMessage, setErrorMessage] = useState();
-  const [isServerError, setIsServerError] = useState(false);
-  const [isNotFound, setIsNotFound] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(); 
+  const [isServerError, setIsServerError] = useState(false); //Произошла ошибка при поиске фильмов
+  const [isNotFound, setIsNotFound] = useState(false); // Фильмы по запросу не найдены
   const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
 
   //* Переменные состояния по фильмам
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
   const [movies, setMovies] = useState([]); // Список найденных фильмов
   const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies); // Отфильтрованные сохраненные фильмы
 
   //* Переменные состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
-  const [searchKeyword, setSearchKeyword] = useState('')
+  const [searchKeyword, setSearchKeyword] = useState('') // Ключевое слово
+  const [selectedCheckboxSavedMovies, setSelectedCheckboxSavedMovies] = useState(false); // Флажок короткометражек не выбран на странице Сохраненные фильмы
+  const [searchKeywordSavedMovies, setSearchKeywordSavedMovies] = useState(''); // Ключевое слово на странице Сохраненных фильмов
+
   const history = useHistory();
 
+  // отслеживание состояния переменных
   useEffect(() => {
     handleTokenCheck();
     setSearchKeyword(localStorage.getItem('searchKeyword' || ''));
     setSelectedCheckbox(localStorage.getItem('selectedCheckbox' || '') === 'true');
+    setSelectedCheckboxSavedMovies(localStorage.getItem('selectedCheckboxSavedMovies') === 'true')
+    setSearchKeyword(localStorage.getItem('searchKeywordSavedMovies' || ''));
     if (JSON.parse(localStorage.getItem('foundMovies'))) {
       setMovies(JSON.parse(localStorage.getItem('foundMovies')));
     }
@@ -79,6 +86,21 @@ function App() {
     }
   }
 
+  // Поиск короткометражек на странице Сохраненных фильмов
+  const handleShortFilms = () => {
+    if (!selectedCheckboxSavedMovies) {
+      setSelectedCheckboxSavedMovies(true);
+      localStorage.setItem('selectedCheckboxSavedMovies', true);
+      setSavedMovies(searchShortMovies(filteredMovies));
+      searchShortMovies(filteredMovies).length === 0 ? setIsNotFound(true) : setIsNotFound(false);
+    } else {
+      setSelectedCheckboxSavedMovies(false);
+      localStorage.setItem('selectedCheckboxSavedMovies', false);
+      filteredMovies.length === 0 ? setIsNotFound(true) : setIsNotFound(false);
+      setSavedMovies(filteredMovies);
+    }
+  }
+
   // Найдем фильмы по критериям
   const handleSetFoundMovies = (movies, keyword, checkbox) => {
     setIsLoading(true);
@@ -99,6 +121,22 @@ function App() {
   // Проверить сохране ли фильм
   const isSavedMovies = (movie) => {
     return savedMovies.some(item => item.movieId === movie.id && item.owner === currentUser._id)
+  }
+
+  //- Обработка запроса на странице Сохраненные фильмы
+  const handleSearchSubmit = (searchQuery) => {
+    localStorage.setItem('searchKeywordSavedMovies', searchQuery); // Записываем в сторедж введенное ключевое слово на странице Сохраненных фильмов
+    localStorage.setItem('selectedCheckboxSavedMovies', selectedCheckboxSavedMovies); // Записываем в сторедж выставленное положение флажка на странице сохраненных фильмов
+    const moviesList = findMovies(savedMovies, searchQuery, selectedCheckboxSavedMovies);
+    setSearchKeywordSavedMovies(searchQuery);
+    if (moviesList.length === 0) {
+      setIsNotFound(true);
+      setSavedMovies(moviesList)
+    } else {
+      setIsNotFound(false);
+      setFilteredMovies(moviesList);
+      setSavedMovies(moviesList);
+    }
   }
 
   //- Обработаем запрос пользователя по поиску фильмов
@@ -290,6 +328,11 @@ function App() {
             movies={savedMovies}
             onDeleteMovie={handleDeleteMovie}
             isSavedMovies={isSavedMovies}
+            onSubmit={handleSearchSubmit}
+            onCheckbox={handleShortFilms}
+            searchKeyword={searchKeywordSavedMovies}
+            isNotFound={isNotFound}
+            isServerError={isServerError}
           />
           <ProtectedRoute
             path='/profile'
