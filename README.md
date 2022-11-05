@@ -27,6 +27,7 @@ Figma <img src="https://img.icons8.com/color/32/000000/figma--v1.png" alt="Figma
 GitHub <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"  alt="GitHub" width="20" height="20"/>
 
 ###### [Ссылка на репозиторий](https://github.com/NatalyMaxi/movies-explorer-frontend)
+###### [Ссылка на пулреквест](https://github.com/NatalyMaxi/movies-explorer-frontend/pull/3)
 
 
 
