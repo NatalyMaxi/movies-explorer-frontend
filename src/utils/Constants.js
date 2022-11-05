@@ -1,6 +1,4 @@
-const { NODE_ENV } = process.env
-export const BASE_URL = (NODE_ENV === 'production') ? 'https://api.domainname.nataly.nomoredomains.icu' : 'http://localhost:3000';
-// export const BASE_URL = 'https://api.domainname.nataly.nomoredomains.icu';
+export const BASE_URL = 'https://api.domainname.nataly.nomoredomains.icu';
 export const MOVIE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 export const checkResponse = (res) => {
