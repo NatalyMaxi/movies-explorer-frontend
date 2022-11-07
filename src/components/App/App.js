@@ -231,6 +231,8 @@ function App() {
           setErrorMessage('Что-то пошло не так...');
         }
         setLoggedIn(false);
+        localStorage.clear();
+        setCurrentUser(null);
       })
       .finally(() => {
         setTimeout(() => setErrorMessage(''), 2000);
