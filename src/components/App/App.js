@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory, Redirect, } from 'react-router-dom';
 import Main from '../Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -344,11 +344,19 @@ function App() {
             onSignOut={handleSignOut}
             isUserDataUpdateStatus={isUserDataUpdateStatus}
           />
-          <Route path='/signin'>
-            <Login onLogin={handleAuthorization} errorMessage={errorMessage} />
+          <Route exact path='/signin'>
+            {!loggedIn ? (
+              <Login onLogin={handleAuthorization} errorMessage={errorMessage} />
+            ) : (
+              <Redirect to='/' />
+            )}
           </Route>
-          <Route path='/signup'>
-            <Register onRegister={handleRegistration} errorMessage={errorMessage} />
+          <Route exact path='/signup'>
+            {!loggedIn ? (
+              <Register onRegister={handleRegistration} errorMessage={errorMessage} />
+            ) : (
+              <Redirect to='/' />
+            )}
           </Route>
           <Route path='*'>
             <ErrorPage />
