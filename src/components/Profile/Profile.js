@@ -10,6 +10,8 @@ const Profile = ({ onUpdateUserData, onSignOut, isUserDataUpdateStatus }) => {
    const currentUser = useContext(CurrentUserContext);
    const { values, errors, isValid, handleChange, setValues, resetForm } = useForm();
 
+   const BlockedButton = (!isValid || (currentUser.name === values.name && currentUser.email === values.email));
+
    useEffect(() => {
       setValues(currentUser)
    }, [currentUser, setValues])
@@ -98,7 +100,7 @@ const Profile = ({ onUpdateUserData, onSignOut, isUserDataUpdateStatus }) => {
                   <ButtonSubmit
                      type='submit'
                      text='Сохранить'
-                     disabled={!isValid}
+                     disabled={BlockedButton}
                      onClick={handleSave}
                   />
 
