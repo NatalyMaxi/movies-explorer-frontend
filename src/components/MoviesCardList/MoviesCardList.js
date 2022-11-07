@@ -3,6 +3,18 @@ import './MoviesCardList.css';
 import { useState, useEffect } from 'react';
 import { useWindowSize } from "../../hooks/useWindowsSize";
 import { useLocation } from 'react-router-dom';
+import {
+   MAX_WIDTH_1280,
+   MIDDLE_WIDTH_768,
+   MIN_WIDTH_480,
+   INITIAL_CARDS_12,
+   INITIAL_CARDS_8,
+   INITIAL_CARDS_6,
+   IINITIAL_CARDS_5,
+   MORE_CARDS_3,
+   MORE_CARDS_2,
+   MORE_CARDS_1
+} from '../../utils/Constants'
 
 const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage, onDeleteMovie, onSaveMovie, isSavedMovies }) => {
    const windowWidth = useWindowSize();
@@ -11,21 +23,21 @@ const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage, onDel
    const location = useLocation();
 
    useEffect(() => {
-      if (windowWidth >= 1280) {
-         setInitialCards(12);
-         setMoreCards(3);
+      if (windowWidth >= MAX_WIDTH_1280) {
+         setInitialCards(INITIAL_CARDS_12);
+         setMoreCards(MORE_CARDS_3);
       }
-      if (windowWidth < 1280 && windowWidth >= 768) {
-         setInitialCards(8);
-         setMoreCards(2);
+      if (windowWidth < MAX_WIDTH_1280 && windowWidth >= MIDDLE_WIDTH_768) {
+         setInitialCards(INITIAL_CARDS_8);
+         setMoreCards(MORE_CARDS_2);
       }
-      if (windowWidth < 768 && windowWidth >= 480) {
-         setInitialCards(6);
-         setMoreCards(2);
+      if (windowWidth < MIDDLE_WIDTH_768 && windowWidth >= MIN_WIDTH_480) {
+         setInitialCards(INITIAL_CARDS_6);
+         setMoreCards(MORE_CARDS_2);
       }
-      if (windowWidth < 480) {
-         setInitialCards(5);
-         setMoreCards(1);
+      if (windowWidth < MIN_WIDTH_480) {
+         setInitialCards(IINITIAL_CARDS_5);
+         setMoreCards(MORE_CARDS_1);
       }
    }, [windowWidth])
 
