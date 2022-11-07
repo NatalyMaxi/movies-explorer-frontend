@@ -39,6 +39,7 @@ const Login = ({ onLogin, errorMessage }) => {
                value={values.email || ''}
                error={errors.email || ''}
                onChange={handleChange}
+               pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
             />
             <AuthField
                id='password'

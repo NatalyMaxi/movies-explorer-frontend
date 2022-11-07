@@ -71,6 +71,7 @@ const Profile = ({ onUpdateUserData, onSignOut, isUserDataUpdateStatus }) => {
                   disabled={isDisabledInput}
                   value={values?.email ?? currentUser.email}
                   onChange={handleChange}
+                  pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
                />
             </div>
             {errors?.email && <span className="profile__input-error">{errors.email}</span>}
