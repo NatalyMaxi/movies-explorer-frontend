@@ -34,3 +34,20 @@ export {
    MORE_CARDS_2,
    MORE_CARDS_1
 };
+
+// Найдем фильмы по ключевому слову
+export const findMovies = (movies, keyword, checkbox) => {
+   const moviesКeywordSearch = movies.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
+   })
+   if (checkbox) {
+      return searchShortMovies(moviesКeywordSearch);
+   } else {
+      return moviesКeywordSearch;
+   }
+}
+
+// Поиск короткометражныx фильмов
+export const searchShortMovies = (movies) => {
+   return movies.filter((movie) => movie.duration <= 40);
+};

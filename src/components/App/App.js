@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
-import { Switch, Route, useHistory, Redirect, } from 'react-router-dom';
+import { Switch, Route, useHistory, Redirect, useLocation } from 'react-router-dom';
 import Main from '../Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -14,6 +14,7 @@ import * as mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { findMovies, searchShortMovies } from '../../utils/Constants'
 
 function App() {
   //* Переменные состояния по пользователю
@@ -22,14 +23,14 @@ function App() {
   const [isUserDataUpdateStatus, setIsUserDataUpdateStatus] = useState('');
 
   //* Переменные состояния ошибок и загрузок
-  const [errorMessage, setErrorMessage] = useState(); 
+  const [errorMessage, setErrorMessage] = useState();
   const [isServerError, setIsServerError] = useState(false); //Произошла ошибка при поиске фильмов
   const [isNotFound, setIsNotFound] = useState(false); // Фильмы по запросу не найдены
   const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
 
   //* Переменные состояния по фильмам
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
-  const [movies, setMovies] = useState([]); // Список найденных фильмов
+  const [initialMovies, setInitialMovies] = useState([]); // Список найденных фильмов
   const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
   const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
   const [filteredMovies, setFilteredMovies] = useState(savedMovies); // Отфильтрованные сохраненные фильмы
@@ -41,52 +42,78 @@ function App() {
   const [searchKeywordSavedMovies, setSearchKeywordSavedMovies] = useState(''); // Ключевое слово на странице Сохраненных фильмов
 
   const history = useHistory();
+  const location = useLocation();
 
   // отслеживание состояния переменных
   useEffect(() => {
     handleTokenCheck();
     setSearchKeyword(localStorage.getItem('searchKeyword' || ''));
     setSelectedCheckbox(localStorage.getItem('selectedCheckbox' || '') === 'true');
-    setSelectedCheckboxSavedMovies(localStorage.getItem('selectedCheckboxSavedMovies') === 'true')
-    setSearchKeyword(localStorage.getItem('searchKeywordSavedMovies' || ''));
-    if (JSON.parse(localStorage.getItem('foundMovies'))) {
-      setMovies(JSON.parse(localStorage.getItem('foundMovies')));
-    }
+    // setSelectedCheckboxSavedMovies(localStorage.getItem('selectedCheckboxSavedMovies') === 'true')
+    // setSearchKeyword(localStorage.getItem('searchKeywordSavedMovies' || ''));
   }, []);
 
-  // Поиск короткометражныx фильмов
-  const searchShortMovies = (movies) => {
-    return movies.filter((movie) => movie.duration <= 40);
-  };
+//!                    Действия с фильмами на странице "Фильмы"                    !
+  
+  useEffect(() => {
+    if (localStorage.getItem('selectedCheckbox') === 'true') {
+      setSelectedCheckbox(true);
+    } else {
+      setSelectedCheckbox(false);
+    }
+  }, [location]); // Устанавливаем длительность в зависимости от положения чекбокса
 
-  // меняем состояние чекбокса на короткометражки
+  useEffect(() => {
+    if (localStorage.getItem('foundMovies')) {
+      const movies = JSON.parse(
+        localStorage.getItem('foundMovies')
+      );
+      setInitialMovies(movies);
+      if (
+        localStorage.getItem('selectedCheckbox') === 'true'
+      ) {
+        setFoundMovies(searchShortMovies(movies));
+      } else {
+        setFoundMovies(movies);
+      }
+    }
+  }, [location]); // Отображаем фильмы в зависимости от положения чекбокса
+
+  //* Меняем состояние чекбокса на короткометражки
   const handleChangeCheckbox = () => {
     setSelectedCheckbox(!selectedCheckbox);
     console.log(selectedCheckbox)
     if (!selectedCheckbox) {
-      setMovies(searchShortMovies(foundMovies));
-      if (foundMovies.length === 0) {
+      setFoundMovies(searchShortMovies(initialMovies));
+      if (findMovies.length === 0) {
         setIsNotFound(true);
       }
     } else {
-      setMovies(foundMovies);
+      setFoundMovies(initialMovies);
     }
     localStorage.setItem('selectedCheckbox', !selectedCheckbox);
   };
 
-  // Найдем фильмы по ключевому слову
-  const findMovies = (movies, keyword, checkbox) => {
-    const moviesКeywordSearch = movies.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
-    })
-    if (checkbox) {
-      return searchShortMovies(moviesКeywordSearch);
+  //* Найдем фильмы по критериям
+  const handleSetFoundMovies = (movies, keyword, checkbox) => {
+    setIsLoading(true);
+    const moviesList = findMovies(movies, keyword, false);
+    if (moviesList.length === 0) {
+      setIsNotFound(true);
     } else {
-      return moviesКeywordSearch;
+      setIsNotFound(false);
     }
+    setInitialMovies(moviesList);
+    setFoundMovies(
+      checkbox ? searchShortMovies(moviesList) : moviesList
+    );
+    localStorage.setItem('foundMovies', JSON.stringify(moviesList));
+    setTimeout(() => setIsLoading(false), 1000)
   }
 
-  // Поиск короткометражек на странице Сохраненных фильмов
+  //!                    Действия с фильмами на странице "Сохраненные фильмы"                    !
+
+  //* Поиск короткометражек на странице Сохраненных фильмов
   const handleShortFilms = () => {
     if (!selectedCheckboxSavedMovies) {
       setSelectedCheckboxSavedMovies(true);
@@ -101,27 +128,12 @@ function App() {
     }
   }
 
-  // Найдем фильмы по критериям
-  const handleSetFoundMovies = (movies, keyword, checkbox) => {
-    setIsLoading(true);
-    const moviesList = findMovies(movies, keyword, false);
-    if (moviesList.length === 0) {
-      setIsNotFound(true);
-    } else {
-      setIsNotFound(false);
-    }
-    setMovies(moviesList);
-    setFoundMovies(
-      checkbox ? searchShortMovies(moviesList) : moviesList
-    );
-    localStorage.setItem('foundMovies', JSON.stringify(moviesList));
-    setTimeout(() => setIsLoading(false), 1000)
-  }
-
-  // Проверить сохране ли фильм
+  //* Проверить сохране ли фильм
   const isSavedMovies = (movie) => {
     return savedMovies.some(item => item.movieId === movie.id && item.owner === currentUser._id)
   }
+
+  //!                    Запросы к серверу по фильмам                    !
 
   //- Обработка запроса на странице Сохраненные фильмы
   const handleSearchSubmit = (searchQuery) => {
@@ -194,7 +206,9 @@ function App() {
       });
   };
 
-  //! Регистрация пользователя
+  //!                    Запросы к серверу по юзеру                    !
+
+  //- Регистрация пользователя
   const handleRegistration = ({ name, email, password }) => {
     mainApi.register({ name, email, password })
       .then(() => {
@@ -213,7 +227,7 @@ function App() {
       });
   }
 
-  //! Авторизация пользователя
+  //- Авторизация пользователя
   const handleAuthorization = ({ email, password }) => {
     mainApi.authorize({ email, password })
       .then((res) => {
@@ -231,7 +245,7 @@ function App() {
           setErrorMessage('Что-то пошло не так...');
         }
         setLoggedIn(false);
-        localStorage.clear();
+        localStorage.removeItem('jwt');
         setCurrentUser(null);
       })
       .finally(() => {
@@ -239,7 +253,7 @@ function App() {
       });
   }
 
-  //! Проверяем токен пользователя и получение его контента
+  //- Проверяем токен пользователя и получение его контента
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (!jwt) {
@@ -265,7 +279,7 @@ function App() {
       })
   };
 
-  //! Изменить данные пользователя в профиле
+  //- Изменить данные пользователя в профиле
 
   const handleUpdateUserData = (data) => {
     const jwt = localStorage.getItem('jwt');
@@ -286,12 +300,12 @@ function App() {
       });
   }
 
-  //! Выйти из аккаунта
+  //- Выйти из аккаунта
   const handleSignOut = () => {
     localStorage.clear()
     setLoggedIn(false);
     history.push('/');
-    setMovies([]);
+    setInitialMovies([]);
     setSavedMovies([]);
     setFoundMovies(false);
     setSelectedCheckbox(false)
@@ -311,7 +325,7 @@ function App() {
             path='/movies'
             component={Movies}
             loggedIn={loggedIn}
-            movies={movies}
+            movies={foundMovies}
             isLoading={isLoading}
             onCheckbox={handleChangeCheckbox}
             checked={selectedCheckbox}
