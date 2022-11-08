@@ -53,8 +53,8 @@ function App() {
     // setSearchKeyword(localStorage.getItem('searchKeywordSavedMovies' || ''));
   }, []);
 
-//!                    Действия с фильмами на странице "Фильмы"                    !
-  
+  //!                    Действия с фильмами на странице "Фильмы"                    !
+
   useEffect(() => {
     if (localStorage.getItem('selectedCheckbox') === 'true') {
       setSelectedCheckbox(true);
@@ -189,22 +189,18 @@ function App() {
   };
 
   //- Обработать запрос на удаления фильма с страницы "Сохраненные фильмы"
-  const handleDeleteMovie = (movie) => {
-    setIsLoading(true);
+  function handleDeleteMovie(movie) {
     const jwt = localStorage.getItem('jwt');
-    mainApi.deleteMovie(movie._id, jwt)
-      .then((movie) => {
-        const updatedSavedMovies = savedMovies.filter(item => movie._id !== item._id);
-        localStorage.setItem('savedMovies', updatedSavedMovies);
-        setSavedMovies(updatedSavedMovies);
+    const deleteCard = savedMovies.find(item => item.movieId === (movie.id || movie.movieId) && item.owner === currentUser._id)
+    if (!deleteCard) return
+    mainApi.deleteMovie(deleteCard._id, jwt)
+      .then(() => {
+        setSavedMovies(savedMovies.filter(c => c._id !== deleteCard._id))
       })
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  }
 
   //!                    Запросы к серверу по юзеру                    !
 
