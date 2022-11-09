@@ -32,16 +32,92 @@ function App() {
   const [initialMovies, setInitialMovies] = useState([]); // Список найденных фильмов
   const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
   const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
+  const [allSavedMovies, setAllSavedMovies] = useState(savedMovies)
+  const [filteredMovies, setFilteredMovies] = useState(allSavedMovies);
 
   //* Переменные состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
   const [searchKeyword, setSearchKeyword] = useState('') // Ключевое слово
+  const [checkboxSavedMovies, setCheckboxSavedMovies] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
     handleTokenCheck();
   }, []);
+
+  //!                    Фильтрование фильмов"                    !
+
+  //* Найдем фильмы по ключевому слову
+  const findMovies = (movies, keyword, checkbox) => {
+    const moviesКeywordSearch = movies.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
+    })
+    if (checkbox) {
+      return searchShortMovies(moviesКeywordSearch);
+    } else {
+      return moviesКeywordSearch;
+    }
+  }
+
+  //* Поиск короткометражныx фильмов
+  const searchShortMovies = (movies) => {
+    return movies.filter((movie) => movie.duration <= 40);
+  };
+
+  //!                    Действия с фильмами на странице "Сохраненные фильмы"                    !
+
+  //* Отслеживаем наличие сохраненных фильмов
+  useEffect(() => {
+    if (savedMovies.length !== 0) {
+      setIsNotFound(false)
+    } else {
+      setIsNotFound(true)
+    }
+  }, [savedMovies])
+
+  //* Отслеживание состояние стэйта чекбокса
+  useEffect(() => {
+    if (localStorage.getItem('checkboxSavedMovies') === 'true') {
+      setCheckboxSavedMovies(true)
+      setAllSavedMovies(searchShortMovies(savedMovies))
+    } else {
+      setCheckboxSavedMovies(false)
+      setAllSavedMovies(savedMovies)
+    }
+  }, [savedMovies]);
+
+  //* Меняем состояние чекбокса на короткометражки
+  function handleChangeCheckboxSavedMovies() {
+    if (!checkboxSavedMovies) {
+      setCheckboxSavedMovies(true)
+      localStorage.setItem('checkboxSavedMovies', true);
+      setAllSavedMovies(searchShortMovies(filteredMovies));
+      if (searchShortMovies(filteredMovies).length === 0) {
+        setIsNotFound(true)
+      }
+      setIsNotFound(false)
+    } else {
+      setCheckboxSavedMovies(false)
+      localStorage.setItem('checkboxSavedMovies', false);
+      if (filteredMovies.length === 0) {
+        setIsNotFound(true)
+      }
+      setIsNotFound(false)
+      setAllSavedMovies(filteredMovies)
+    }
+  }
+
+  //* Поиск фильмов из сохраненных ранее по ключевому слову
+  function handleSearchSavedMovies(keyword) {
+    if (findMovies(savedMovies, keyword, checkboxSavedMovies).length === 0) {
+      setIsNotFound(true)
+    } else {
+      setIsNotFound(false)
+      setFilteredMovies(findMovies(savedMovies, keyword, checkboxSavedMovies))
+      setAllSavedMovies(findMovies(savedMovies, keyword, checkboxSavedMovies))
+    }
+  }
 
   //!                    Действия с фильмами на странице "Фильмы"                    !
 
@@ -61,23 +137,6 @@ function App() {
       }
     }
   }, []);
-
-  //* Найдем фильмы по ключевому слову
-  const findMovies = (movies, keyword, checkbox) => {
-    const moviesКeywordSearch = movies.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase())
-    })
-    if (checkbox) {
-      return searchShortMovies(moviesКeywordSearch);
-    } else {
-      return moviesКeywordSearch;
-    }
-  }
-
-  //* Поиск короткометражныx фильмов
-  const searchShortMovies = (movies) => {
-    return movies.filter((movie) => movie.duration <= 40);
-  };
 
   //* Меняем состояние чекбокса на короткометражки
   const handleChangeCheckbox = () => {
@@ -308,6 +367,11 @@ function App() {
             onDeleteMovie={handleDeleteMovie}
             isSavedMovies={isSavedMovies}
             savedMovies={savedMovies}
+            isNotFound={isNotFound}
+            movies={allSavedMovies}
+            onCheckbox={handleChangeCheckboxSavedMovies}
+            onSubmit={handleSearchSavedMovies}
+            checked={checkboxSavedMovies}
           />
           <ProtectedRoute
             path='/profile'

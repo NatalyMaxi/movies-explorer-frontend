@@ -2,7 +2,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-const SavedMovies = ({ movies, onDeleteMovie, isSavedMovies, onCheckbox, onSubmit, checked, isNotFound, isServerError, searchKeyword, savedMovies }
+const SavedMovies = ({ movies, onDeleteMovie, isSavedMovies, onCheckbox, onSubmit, checked, isNotFound, savedMovies }
 ) => {
    return (
       <main className='saved-movies'>
@@ -10,7 +10,6 @@ const SavedMovies = ({ movies, onDeleteMovie, isSavedMovies, onCheckbox, onSubmi
             onSubmit={onSubmit}
             onCheckbox={onCheckbox}
             checked={checked}
-            defaultValue={searchKeyword}
          />
          <MoviesCardList
             movies={movies}
@@ -18,7 +17,6 @@ const SavedMovies = ({ movies, onDeleteMovie, isSavedMovies, onCheckbox, onSubmi
             onDeleteMovie={onDeleteMovie}
             isSavedMovies={isSavedMovies}
             isNotFound={isNotFound}
-            isServerError={isServerError}
             savedMovies={savedMovies}
          />
       </main>
