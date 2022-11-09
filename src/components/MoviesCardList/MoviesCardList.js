@@ -84,58 +84,24 @@ const MoviesCardList = ({ movies, isNotFound, isServerError, isMoviesPage, onDel
                </div>
             </>
          ) : (
-               <>
-                  <p className={classIsNotFound}>Ничего не найдено.</p>
-                  <p className={classServerError}>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.</p>
-                  <ul className='cards__container'>
-                     {movies.map((movie) => {
-                        return (
-                           <MoviesCard
-                              movie={movie}
-                              key={movie.movieId}
-                              onDeleteMovie={onDeleteMovie}
-                              isSavedMovies={isSavedMovies}
-                              isMoviesPage={isMoviesPage}
-                           />
-                        );
-                     })}
-                  </ul></>
+            <>
+               <p className={classIsNotFound}>Ничего не найдено.</p>
+               <p className={classServerError}>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.</p>
+               <ul className='cards__container'>
+                  {movies.map((movie) => {
+                     return (
+                        <MoviesCard
+                           movie={movie}
+                           key={movie.movieId}
+                           onDeleteMovie={onDeleteMovie}
+                           isSavedMovies={isSavedMovies}
+                           isMoviesPage={isMoviesPage}
+                        />
+                     );
+                  })}
+               </ul>
+            </>
          )}
-
-
-
-
-
-
-
-         {/* <p className={classIsNotFound}>Ничего не найдено.</p>
-         <p className={classServerError}>Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.</p>
-         <ul className='cards__container'>
-            {movies.slice(0, initialCards).map((movie, i) => {
-               return (
-                  <MoviesCard
-                     movie={movie}
-                     key={isMoviesPage ? movie.id : movie.movieId}
-                     onDeleteMovie={onDeleteMovie}
-                     onSaveMovie={onSaveMovie}
-                     isSavedMovies={isSavedMovies}
-                     isMoviesPage={isMoviesPage}
-                  />
-               );
-            })}
-         </ul>
-         {location.pathname === '/movies' && (
-            <div className='cards__button-container'>
-               <button
-                  type='button'
-                  onClick={handleMoreButtonClick}
-                  className={
-                     movies.length <= 7 || initialCards >= movies.length
-                        ? 'cards__button_hidden'
-                        : 'cards__button'
-                  }>Ещё</button>
-            </div>
-         )} */}
       </section>
    )
 }

@@ -36,8 +36,8 @@ const Movies = ({
                   isServerError={isServerError}
                   onDeleteMovie={onDeleteMovie}
                   onSaveMovie={onSaveMovie}
-                     isSavedMovies={isSavedMovies}
-                     savedMovies={savedMovies}
+                  isSavedMovies={isSavedMovies}
+                  savedMovies={savedMovies}
                />
             )}
          </main>
