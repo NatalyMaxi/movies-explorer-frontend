@@ -2,7 +2,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-const SavedMovies = ({ movies, onDeleteMovie, onSaveMovie, isSavedMovies, onCheckbox, onSubmit, checked, isNotFound, isServerError, searchKeyword, }
+const SavedMovies = ({ movies, onDeleteMovie, isSavedMovies, onCheckbox, onSubmit, checked, isNotFound, isServerError, searchKeyword, savedMovies }
 ) => {
    return (
       <main className='saved-movies'>
@@ -16,10 +16,10 @@ const SavedMovies = ({ movies, onDeleteMovie, onSaveMovie, isSavedMovies, onChec
             movies={movies}
             isMoviesPage={false}
             onDeleteMovie={onDeleteMovie}
-            onSaveMovie={onSaveMovie}
             isSavedMovies={isSavedMovies}
             isNotFound={isNotFound}
             isServerError={isServerError}
+            savedMovies={savedMovies}
          />
       </main>
    )

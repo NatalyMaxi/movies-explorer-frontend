@@ -332,6 +332,7 @@ function App() {
             onSaveMovie={handleSaveMovie}
             onDeleteMovie={handleDeleteMovie}
             isSavedMovies={isSavedMovies}
+            savedMovies={savedMovies}
           />
           <ProtectedRoute
             path='/saved-movies'
@@ -345,6 +346,7 @@ function App() {
             searchKeyword={searchKeywordSavedMovies}
             isNotFound={isNotFound}
             isServerError={isServerError}
+            savedMovies={savedMovies}
           />
           <ProtectedRoute
             path='/profile'
