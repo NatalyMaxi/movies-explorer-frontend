@@ -1,16 +1,22 @@
+import { Route } from 'react-router-dom';
 import './Header.css';
 import Logo from '../Logo/logo';
 import Navigation from '../Navigation/Navigation';
-import { Link } from 'react-router-dom';
 
 const Header = ({ loggedIn }) => {
+   const routes = [
+      '/',
+      '/profile',
+      '/movies',
+      '/saved-movies',
+   ]
    return (
-      <header className='header'>
-         <Link to='/'>
+      <Route exact path={routes}>
+         <header className='header'>
             <Logo />
-         </Link>
-         <Navigation loggedIn={loggedIn} />
-      </header>
+            <Navigation loggedIn={loggedIn} />
+         </header>
+      </Route>
    )
 }
 

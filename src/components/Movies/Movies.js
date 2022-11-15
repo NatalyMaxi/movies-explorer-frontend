@@ -1,21 +1,47 @@
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ loggedIn }) => {
+const Movies = ({
+   onSubmit,
+   movies,
+   isLoading,
+   isNotFound,
+   onCheckbox,
+   checked,
+   isServerError,
+   searchKeyword,
+   onDeleteMovie,
+   onSaveMovie,
+   isSavedMovies,
+   savedMovies
+}) => {
    return (
       <>
-         <Header loggedIn={loggedIn} />
          <main className='movies'>
-            <SearchForm />
-            <MoviesCardList isMovies={true} />
+            <SearchForm
+               onSubmit={onSubmit}
+               onCheckbox={onCheckbox}
+               checked={checked}
+               defaultValue={searchKeyword}
+            />
+            {isLoading ? (
+               <Preloader />
+            ) : (
+               <MoviesCardList
+                  isMoviesPage={true}
+                  movies={movies}
+                  isNotFound={isNotFound}
+                  isServerError={isServerError}
+                  onDeleteMovie={onDeleteMovie}
+                  onSaveMovie={onSaveMovie}
+                  isSavedMovies={isSavedMovies}
+                  savedMovies={savedMovies}
+               />
+            )}
          </main>
-         <Footer />
       </>
-
-
    )
 }
 

@@ -1,5 +1,4 @@
 .search {
-   position: relative;
    margin: 0 auto 10px;
    padding: 70px 0 69px;
    border-bottom: 1px solid #424242;
@@ -8,8 +7,19 @@
 .search__form {
    display: flex;
    align-items: center;
+   position: relative;
    background-color: #2f2f2f;
    border-radius: 9px;
+}
+
+.search__form-error {
+   position: absolute;
+   left: 63px;
+   bottom: -10px;
+   font-weight: 400;
+   font-size: 12px;
+   line-height: 14px;
+   color: #ee3465;
 }
 
 .search__input-label {
@@ -32,7 +42,7 @@
 
 .search__input:focus {
    outline: none;
-   border: 1px solid #3DDC84;
+   border: 1px solid #3ddc84;
 }
 
 .search__icon {
@@ -72,11 +82,14 @@
    }
 
    .search__button {
-   margin-right: 0;
-}
+      margin-right: 0;
+   }
 }
 
 @media screen and (max-width: 550px) {
+   .search__form-error {
+   left: 19px;
+} 
    .search__input-label {
       display: none;
    }

@@ -60,8 +60,8 @@
 @media screen and (max-width: 550px) {
    .checkbox {
       position: absolute;
-      top: 185px;
       right: 126px;
+      bottom: -70px;
       background-color: #202020;
       border: none;
       padding: 0;

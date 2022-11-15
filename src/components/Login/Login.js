@@ -1,10 +1,21 @@
+import useForm from '../../hooks/useForm';
 import Auth from "../Auth/Auth";
 import AuthField from "../AuthField/AuthField";
-import ButtonSubmit from "../ButtonSubmit/ButtonSubmit";
 import Form from "../Form/Form";
 
 
-const Login = () => {
+const Login = ({ onLogin, errorMessage }) => {
+   const { values, handleChange, resetForm, errors, isValid } = useForm();
+
+   function handleSubmit(evt) {
+      evt.preventDefault();
+      if (!values.password || !values.email) {
+         return;
+      }
+      onLogin(values);
+      resetForm()
+   }
+
    return (
       <Auth
          title='Рады видеть!'
@@ -12,26 +23,37 @@ const Login = () => {
          route='/signup'
          link='Регистрация'
       >
-         <Form>
+         <Form
+            onSubmit={handleSubmit}
+            errorMessage={errorMessage || ''}
+            text='Войти'
+            disabled={!isValid}
+         >
             <AuthField
+               id='email'
                label='E-mail'
                name='email'
                type='email'
-               error=''
                required
+               autoComplete='email'
+               value={values.email || ''}
+               error={errors.email || ''}
+               onChange={handleChange}
+               pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
             />
             <AuthField
+               id='password'
                label='Пароль'
                name='password'
                type='password'
-               error=''
                minLength='8'
                required
+               autoComplete='password'
+               value={values.password || ''}
+               error={errors.password || ''}
+               onChange={handleChange}
             />
          </Form>
-         <ButtonSubmit
-            text='Войти'
-         />
       </Auth>
    )
 }
