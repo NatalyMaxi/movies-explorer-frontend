@@ -37,7 +37,7 @@ CSS3 <img src="https://img.icons8.com/stickers/2x/css3.png" alt="CSS3" width="20
 Flexbox <img src="https://avatars.mds.yandex.net/i?id=e1901bd3569a85ebdc91cec3b392a061-5234049-images-thumbs&n=13&exp=1" alt="Flexbox" width="20" height="20"/>  
 Grid Layout <img src="https://avatars.mds.yandex.net/i?id=a279ee76ee07008dde73bc99de8b09a030da93f0-4162430-images-thumbs&n=13&exp=1;" width="20" height="20"/>  
 Media Queries <img src="https://avatars.mds.yandex.net/i?id=40ae60f4aa596ea446a6a70c8fce7b29-5204918-images-thumbs&n=13&exp=1" width="20" height="20" lt="@media"/>  
-BEM nested <img src="https://img.icons8.com/office/30/000000/plugin.png" alt="BEM nested" width="20" height="20"/>  
+BEM мотодология <img src="https://avatars.mds.yandex.net/i?id=2a0000017a06cd52ad8b3111bf59b6321726-4078058-images-thumbs&n=13&exp=1" width="20" height="20" alt="BEM"/>  
 Webpack <img src="https://avatars.mds.yandex.net/i?id=051cdceddbf7ff78346b435824ad80994baf1140-5313698-images-thumbs&n=13&exp=1"  alt="Webpack" width="20" height="20"/>  
 GitHub <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"  alt="GitHub" width="20" height="20"/>  
 Figma <img src="https://img.icons8.com/color/32/000000/figma--v1.png" alt="Figma" width="20" height="20"/>  
@@ -56,7 +56,6 @@ $ npm install
 $ npm run start
 
 ```
-
 ### :link: Ссылки
 ###### [API](https://api.domainname.nataly.nomoredomains.icu) для регистрации/авторизации и хранения сохраненных фильмов:  
 ###### [публичное API](https://api.nomoreparties.co/beatfilm-movies) для получения коллекции фильмов BeatFilm:  
